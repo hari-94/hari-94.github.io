@@ -1,0 +1,582 @@
+<title>Hari Ulaganathan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#f5f7f8;
+    --surface:#ffffff;
+    --surface-sunk:#eef2f4;
+    --ink:#14202a;
+    --ink-soft:#3d4f5d;
+    --muted:#63798a;
+    --rule:#d8e1e6;
+    --rule-strong:#b9c8d1;
+    --accent:#125f73;
+    --accent-soft:#e2eef1;
+    --figure:#a4610d;
+    --on-accent:#ffffff;
+    --shadow:0 1px 2px rgba(20,32,42,.06);
+    --maxw:1080px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0d141a;
+      --surface:#141e26;
+      --surface-sunk:#101922;
+      --ink:#e7eef3;
+      --ink-soft:#bccbd6;
+      --muted:#8b9daa;
+      --rule:#23323e;
+      --rule-strong:#334756;
+      --accent:#5cb6d0;
+      --accent-soft:#16303b;
+      --figure:#e2a457;
+      --on-accent:#0d141a;
+      --shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0d141a;
+    --surface:#141e26;
+    --surface-sunk:#101922;
+    --ink:#e7eef3;
+    --ink-soft:#bccbd6;
+    --muted:#8b9daa;
+    --rule:#23323e;
+    --rule-strong:#334756;
+    --accent:#5cb6d0;
+    --accent-soft:#16303b;
+    --figure:#e2a457;
+    --on-accent:#0d141a;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-underline-offset:3px;}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+  h1,h2,h3{font-family:Archivo,"Archivo",system-ui,sans-serif;text-wrap:balance;margin:0;line-height:1.15;}
+  p{margin:0;}
+  ul{margin:0;padding:0;list-style:none;}
+
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:20px;}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:20;
+    background:color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter:saturate(1.4) blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-in{display:flex;align-items:center;gap:22px;height:54px;}
+  .nav-name{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;margin-right:auto;color:var(--ink);text-decoration:none;}
+  .nav-links{display:flex;gap:20px;}
+  .nav-links a{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted);text-decoration:none;
+  }
+  .nav-links a:hover{color:var(--accent);}
+  @media (max-width:720px){ .nav-links{display:none;} }
+
+  /* ---------- shared section furniture ---------- */
+  .sec{border-top:1px solid var(--rule);padding-block:56px;}
+  .sec:first-of-type{border-top:0;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:24px;display:block;
+  }
+  .sec-h{font-size:clamp(21px,3.2vw,26px);font-weight:600;letter-spacing:-.015em;margin-bottom:10px;}
+  .sec-lede{color:var(--ink-soft);max-width:62ch;margin-bottom:32px;}
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:52px 56px;display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:start;}
+  .portrait{
+    width:126px;height:126px;border-radius:50%;object-fit:cover;
+    border:1px solid var(--rule-strong);box-shadow:var(--shadow);background:var(--surface-sunk);
+  }
+  .hero-meta{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:14px;
+  }
+  .hero h1{font-size:clamp(34px,6vw,50px);font-weight:700;letter-spacing:-.03em;margin-bottom:18px;}
+  .thesis{font-size:clamp(17px,2.4vw,20px);line-height:1.5;color:var(--ink-soft);max-width:58ch;}
+  .thesis strong{color:var(--ink);font-weight:600;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;letter-spacing:.04em;
+    padding:9px 15px;border:1px solid var(--rule-strong);border-radius:3px;
+    text-decoration:none;color:var(--ink);background:var(--surface);
+  }
+  .btn:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent);}
+  .btn-primary:hover{opacity:.88;border-color:var(--accent);color:var(--on-accent);}
+  @media (max-width:640px){
+    .hero{grid-template-columns:1fr;gap:22px;padding-block:36px 44px;}
+    .portrait{width:96px;height:96px;}
+  }
+
+  /* ---------- value pillars ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
+  .pillar{background:var(--surface);padding:24px 22px;}
+  .pillar h3{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:8px;}
+  .pillar p{color:var(--ink-soft);font-size:14.5px;line-height:1.62;}
+  .pillar .tag{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);display:block;margin-bottom:11px;
+  }
+  @media (max-width:700px){ .pillars{grid-template-columns:1fr;} }
+
+  /* ---------- figures band ---------- */
+  .figures{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
+  .fig dt{
+    font-family:Archivo,sans-serif;font-size:clamp(26px,4.4vw,34px);font-weight:700;
+    color:var(--figure);letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.05;
+  }
+  .fig dd{margin:7px 0 0;font-size:13.5px;color:var(--muted);line-height:1.5;max-width:24ch;}
+  @media (max-width:760px){ .figures{grid-template-columns:repeat(2,1fr);gap:22px;} }
+
+  /* ---------- pipeline diagram ---------- */
+  .pipe{
+    display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+    margin-top:30px;padding:18px;border:1px solid var(--rule);border-radius:4px;
+    background:var(--surface-sunk);
+  }
+  .pipe-node{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.04em;
+    padding:6px 11px;border:1px solid var(--rule-strong);border-radius:3px;
+    background:var(--surface);color:var(--ink-soft);white-space:nowrap;
+  }
+  .pipe-node.is-end{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);}
+  .pipe-arrow{color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:12px;}
+  .pipe-cap{
+    width:100%;margin-top:4px;font-size:12.5px;color:var(--muted);
+  }
+
+  /* ---------- case studies ---------- */
+  .cases{display:flex;flex-direction:column;gap:0;}
+  .case{
+    display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.5fr);gap:30px;
+    padding-block:28px;border-top:1px solid var(--rule);
+  }
+  .case:first-child{border-top:0;padding-top:4px;}
+  .case-id{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:9px;
+  }
+  .case h3{font-size:19px;font-weight:600;letter-spacing:-.015em;margin-bottom:12px;}
+  .stack{display:flex;flex-wrap:wrap;gap:5px;}
+  .chip{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.05em;
+    padding:3px 8px;border-radius:2px;background:var(--surface-sunk);
+    color:var(--ink-soft);border:1px solid var(--rule);
+  }
+  .repo-link{
+    display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.03em;
+    color:var(--accent);text-decoration:none;border-bottom:1px solid var(--rule-strong);padding-bottom:2px;
+  }
+  .repo-link:hover{border-color:var(--accent);}
+  .qa{display:flex;flex-direction:column;gap:13px;}
+  .qa div{display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:baseline;}
+  .qa dt{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);padding-top:3px;
+  }
+  .qa dd{margin:0;font-size:14.5px;line-height:1.62;color:var(--ink-soft);}
+  .qa .out{color:var(--ink);}
+  @media (max-width:800px){
+    .case{grid-template-columns:1fr;gap:16px;}
+    .qa div{grid-template-columns:1fr;gap:3px;}
+  }
+
+  /* ---------- experience ---------- */
+  .roles{display:flex;flex-direction:column;}
+  .role{display:grid;grid-template-columns:150px 1fr;gap:26px;padding-block:20px;border-top:1px solid var(--rule);}
+  .role:first-child{border-top:0;padding-top:0;}
+  .role-when{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.05em;
+    color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px;
+  }
+  .role h3{font-size:16.5px;font-weight:600;margin-bottom:3px;letter-spacing:-.01em;}
+  .role .org{font-size:13.5px;color:var(--accent);font-weight:500;margin-bottom:10px;}
+  .role li{
+    font-size:14.5px;color:var(--ink-soft);line-height:1.6;padding-left:16px;position:relative;margin-bottom:5px;
+  }
+  .role li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--rule-strong);}
+  @media (max-width:700px){ .role{grid-template-columns:1fr;gap:8px;} }
+
+  /* ---------- skills ---------- */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 34px;}
+  .skill-h{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:9px;
+    padding-bottom:7px;border-bottom:1px solid var(--rule);
+  }
+  .skill-l{font-size:14.5px;color:var(--ink-soft);line-height:1.68;}
+  @media (max-width:700px){ .skills{grid-template-columns:1fr;} }
+
+  /* ---------- credentials ---------- */
+  .creds{display:grid;grid-template-columns:repeat(2,1fr);gap:34px;}
+  .cred-row{display:flex;justify-content:space-between;gap:16px;padding-block:11px;border-top:1px solid var(--rule);}
+  .cred-row:first-of-type{border-top:0;}
+  .cred-row strong{font-weight:600;font-size:14.5px;display:block;}
+  .cred-row span{font-size:13.5px;color:var(--muted);}
+  .cred-when{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;color:var(--muted);
+    white-space:nowrap;font-variant-numeric:tabular-nums;padding-top:2px;
+  }
+  @media (max-width:760px){ .creds{grid-template-columns:1fr;gap:26px;} }
+
+  /* ---------- contact ---------- */
+  .contact{padding-block:56px 30px;border-top:1px solid var(--rule);}
+  .contact h2{font-size:clamp(22px,3.6vw,30px);font-weight:700;letter-spacing:-.025em;margin-bottom:12px;}
+  .contact p{color:var(--ink-soft);max-width:54ch;margin-bottom:24px;}
+  .foot{
+    border-top:1px solid var(--rule);padding-block:20px 34px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+  }
+</style>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="nav-name" href="#top">Hari Ulaganathan</a>
+    <div class="nav-links">
+      <a href="#value">Value</a>
+      <a href="#work">Case studies</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+
+  <header class="hero">
+    <img class="portrait" src="hari.jpg" alt="Hari Prasath Ulaganathan">
+    <div>
+      <div class="hero-meta">Data Analyst &nbsp;·&nbsp; Silverthorne, Colorado &nbsp;·&nbsp; Open to relocation</div>
+      <h1>Hari Prasath Ulaganathan</h1>
+      <p class="thesis">I build the layer between raw data and the decision — <strong>modelling source data into tested, documented pipelines</strong>, then the dashboards and reports teams actually act on. Four-plus years across analytics, BI and reporting, in SQL, Python, dbt/Snowflake and Looker.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:hari8059@gmail.com">Email me</a>
+        <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+        <a class="btn" href="https://github.com/hari-94" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec" id="value">
+    <span class="eyebrow">What I bring to a team</span>
+    <h2 class="sec-h">Analysts who only build charts create a queue. I try to remove one.</h2>
+    <p class="sec-lede">Every point below is something I have already shipped in a production environment — the evidence sits in the case studies further down.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <span class="tag">End to end</span>
+        <h3>I own the whole path, not just the last chart</h3>
+        <p>I model raw source data into layered, version-controlled dbt marts on Snowflake, then build reporting on top of that curated layer — so the number on the dashboard has a traceable lineage instead of a one-off script behind it.</p>
+      </div>
+      <div class="pillar">
+        <span class="tag">Leverage</span>
+        <h3>I build self-service so the queue shrinks</h3>
+        <p>At CMA-CGM I defined Looker Explores and metric definitions so PMO and infrastructure teams could pull their own ticketing and resource numbers. Requests that used to need an analyst stopped needing one.</p>
+      </div>
+      <div class="pillar">
+        <span class="tag">Data quality</span>
+        <h3>I check the number before someone else has to</h3>
+        <p>I trace upstream discrepancies back to source tables and embed validation and tests into transformations, so dashboard metrics reconcile with the source of truth — and stakeholders stop quietly losing trust in the report.</p>
+      </div>
+      <div class="pillar">
+        <span class="tag">Translation</span>
+        <h3>I turn a business question into a spec</h3>
+        <p>An MBA and two years in a PMO taught me to sit with stakeholders, gather requirements and convert them into KPI and metric definitions and report specifications — before any SQL gets written.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="eyebrow">Selected figures from real work</span>
+    <dl class="figures">
+      <div class="fig">
+        <dt>30,401</dt>
+        <dd>shift records recovered into a structured dataset</dd>
+      </div>
+      <div class="fig">
+        <dt>85</dt>
+        <dd>spreadsheet tabs consolidated by one Python pipeline</dd>
+      </div>
+      <div class="fig">
+        <dt>181</dt>
+        <dd>employees covered by the resulting schedule analysis</dd>
+      </div>
+      <div class="fig">
+        <dt>4+</dt>
+        <dd>years across analytics, BI and reporting</dd>
+      </div>
+    </dl>
+
+    <div class="pipe">
+      <span class="pipe-node">raw source</span>
+      <span class="pipe-arrow">&rarr;</span>
+      <span class="pipe-node">staging</span>
+      <span class="pipe-arrow">&rarr;</span>
+      <span class="pipe-node">intermediate</span>
+      <span class="pipe-arrow">&rarr;</span>
+      <span class="pipe-node">mart</span>
+      <span class="pipe-arrow">&rarr;</span>
+      <span class="pipe-node is-end">dashboard / report</span>
+      <p class="pipe-cap">The dbt layering I use on Snowflake — each stage version-controlled, documented and testable, so a metric can be traced back to the row it came from.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <span class="eyebrow">Case studies</span>
+    <h2 class="sec-h">Five problems, and what changed</h2>
+    <p class="sec-lede">Each one follows the same shape: the problem someone actually had, what I built, and what was different afterwards.</p>
+
+    <div class="cases">
+
+      <article class="case">
+        <div>
+          <div class="case-id">ThoughtSpot &nbsp;·&nbsp; 2022–2023</div>
+          <h3>Analytics pipeline modernization</h3>
+          <div class="stack">
+            <span class="chip">dbt</span><span class="chip">Snowflake</span><span class="chip">Python</span><span class="chip">SQL</span>
+          </div>
+          <a class="repo-link" href="https://github.com/hari-94/dbt_TS" target="_blank" rel="noopener">github.com/hari-94/dbt_TS &rarr;</a>
+        </div>
+        <dl class="qa">
+          <div><dt>Problem</dt><dd>Reporting ran on ad-hoc SQL scripts with no version control and no tests, and recurring performance reports were assembled by hand every cycle.</dd></div>
+          <div><dt>Built</dt><dd>Modelled raw source data into layered dbt models — staging, intermediate and mart — on Snowflake, with validation and data-quality checks embedded in the transformations. Automated the recurring KPI and performance reports in Python against the curated marts.</dd></div>
+          <div><dt>Outcome</dt><dd class="out">Transformations became version-controlled, documented and testable, and manual report assembly came out of the analytics workflow entirely.</dd></div>
+        </dl>
+      </article>
+
+      <article class="case">
+        <div>
+          <div class="case-id">CMA-CGM &nbsp;·&nbsp; 2020–2021</div>
+          <h3>Self-service BI enablement</h3>
+          <div class="stack">
+            <span class="chip">Looker</span><span class="chip">LookML</span><span class="chip">Snowflake</span><span class="chip">SQL</span>
+          </div>
+        </div>
+        <dl class="qa">
+          <div><dt>Problem</dt><dd>PMO and IT infrastructure teams needed ticketing and resource-allocation numbers on demand, and every request routed through an analyst first.</dd></div>
+          <div><dt>Built</dt><dd>LookML-defined Explores and metric definitions over curated Snowflake tables, plus a trace of upstream data-quality discrepancies in the source tables feeding them.</dd></div>
+          <div><dt>Outcome</dt><dd class="out">Teams self-served their own KPI reporting without analyst involvement, and dashboard metrics stayed consistent with source-of-truth records.</dd></div>
+        </dl>
+      </article>
+
+      <article class="case">
+        <div>
+          <div class="case-id">Grand Colorado on Peak 8 &nbsp;·&nbsp; 2025–now</div>
+          <h3>Labor schedule data recovery</h3>
+          <div class="stack">
+            <span class="chip">Python</span><span class="chip">openpyxl</span><span class="chip">ETL</span><span class="chip">clustering</span>
+          </div>
+        </div>
+        <dl class="qa">
+          <div><dt>Problem</dt><dd>Years of housekeeping scheduling history sat trapped in a single multi-year Excel workbook of roughly 85 sheets — unqueryable, and therefore unused.</dd></div>
+          <div><dt>Built</dt><dd>A Python/openpyxl ETL pipeline that cleaned and transformed the workbook into 30,401 structured shift records across 181 employees, then ran quantitative trend, clustering, travel and workload-balance comparisons across them.</dd></div>
+          <div><dt>Outcome</dt><dd class="out">Scheduling policy could be argued from measured history rather than recollection.</dd></div>
+        </dl>
+      </article>
+
+      <article class="case">
+        <div>
+          <div class="case-id">Grand Colorado on Peak 8 &nbsp;·&nbsp; 2025–now</div>
+          <h3>Scheduling optimization engine</h3>
+          <div class="stack">
+            <span class="chip">Python</span><span class="chip">optimization</span><span class="chip">operations analytics</span>
+          </div>
+          <a class="repo-link" href="https://github.com/hari-94/BGV-Scheduling" target="_blank" rel="noopener">github.com/hari-94/BGV-Scheduling &rarr;</a>
+        </div>
+        <dl class="qa">
+          <div><dt>Problem</dt><dd>Room assignments across housekeeping staff were set by hand, and quality inspectors were routed in a way that sent them back and forth between floors.</dd></div>
+          <div><dt>Built</dt><dd>A scheduling automation tool implementing custom tight-packing and greedy-packing algorithms to assign Full Clean and Daily Service rooms across staff, plus re-engineered inspector group assignment to run sequentially by floor.</dd></div>
+          <div><dt>Outcome</dt><dd class="out">Room assignment moved from manual to algorithmic, and unnecessary floor-to-floor travel during inspections was designed out of the route.</dd></div>
+        </dl>
+      </article>
+
+      <article class="case">
+        <div>
+          <div class="case-id">Grand Colorado on Peak 8 &nbsp;·&nbsp; 2025–now</div>
+          <h3>Budget management system</h3>
+          <div class="stack">
+            <span class="chip">Streamlit</span><span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">ReportLab</span>
+          </div>
+          <a class="repo-link" href="https://github.com/hari-94/gc8-budget-tracker" target="_blank" rel="noopener">github.com/hari-94/gc8-budget-tracker &rarr;</a>
+        </div>
+        <dl class="qa">
+          <div><dt>Problem</dt><dd>Departmental budget tracking lived in manual spreadsheets, where the same expense could be entered twice and nobody noticed until reconciliation.</dd></div>
+          <div><dt>Built</dt><dd>A full-stack budget application on a relational database with vendor management and database-enforced duplicate-expense prevention, a live dashboard showing month-over-month variance and over-budget alerts, and automated PDF reporting for stakeholders. I owned deployment through GitHub and Streamlit Cloud.</dd></div>
+          <div><dt>Outcome</dt><dd class="out">Spreadsheet tracking was replaced by a system where the data validates itself and the monthly report generates itself.</dd></div>
+        </dl>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="sec" id="experience">
+    <span class="eyebrow">Experience</span>
+    <h2 class="sec-h">Where I have done this</h2>
+    <div class="roles" style="margin-top:28px;">
+
+      <div class="role">
+        <div class="role-when">Nov 2025 — present</div>
+        <div>
+          <h3>Internal Tools Developer</h3>
+          <div class="org">Grand Colorado on Peak 8 &nbsp;·&nbsp; Housekeeping Operations</div>
+          <ul>
+            <li>Built scheduling automation, a budget management application and a live KPI dashboard with month-over-month trend analysis and over-budget alerts.</li>
+            <li>Built a Python ETL pipeline over an 85-sheet labor workbook and ran the quantitative analysis that followed.</li>
+            <li>Own the full deployment lifecycle on GitHub and Streamlit Cloud, including validation and troubleshooting in production.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-when">Aug 2022 — Jun 2023</div>
+        <div>
+          <h3>Solutions Analyst</h3>
+          <div class="org">ThoughtSpot</div>
+          <ul>
+            <li>Gathered business requirements with cross-functional stakeholders and translated them into KPI and metric definitions and report specifications.</li>
+            <li>Delivered BI dashboards on schedule; wrote SQL against Snowflake to support analysis, ad-hoc requests and dashboard metrics.</li>
+            <li>Authored the business proposals that secured new client engagements, and mentored teammates on SQL data handling and dashboard practice.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-when">Jun 2020 — Nov 2021</div>
+        <div>
+          <h3>PMO Senior Executive</h3>
+          <div class="org">CMA-CGM</div>
+          <ul>
+            <li>Published weekly and monthly KPI and project status reports, and built dashboards tracking resource allocation and delivery performance for the IT infrastructure team.</li>
+            <li>Ran trend analysis across project and resource data to flag risks and showstoppers before they escalated.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-when">Jul 2019 — Jun 2020</div>
+        <div>
+          <h3>Management Trainee, Risk Management</h3>
+          <div class="org">CMA-CGM</div>
+          <ul>
+            <li>Supported ad-hoc analysis, project reporting and resource tracking for leadership requests.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec" id="skills">
+    <span class="eyebrow">Toolkit</span>
+    <h2 class="sec-h">What I work in</h2>
+    <div class="skills" style="margin-top:28px;">
+      <div>
+        <div class="skill-h">Data analysis &amp; SQL</div>
+        <p class="skill-l">SQL · PL/SQL · Python · R · MySQL · PostgreSQL · Microsoft SQL Server · data validation · data profiling · ad-hoc and trend analysis</p>
+      </div>
+      <div>
+        <div class="skill-h">BI &amp; reporting</div>
+        <p class="skill-l">Tableau · Power BI · Looker · Qlik (QlikView, Qlik Sense) · Excel (advanced functions, pivot tables, Power Query) · dashboard development · KPI and metric definitions</p>
+      </div>
+      <div>
+        <div class="skill-h">Data engineering &amp; cloud</div>
+        <p class="skill-l">dbt · Snowflake · Airflow · Azure Data Factory · Azure Databricks · Azure Data Lake · AWS · ETL · data warehousing</p>
+      </div>
+      <div>
+        <div class="skill-h">Analytics &amp; modelling</div>
+        <p class="skill-l">Pandas · NumPy · SciPy · scikit-learn · statsmodels · regression modelling · time series · NLP · Matplotlib · Seaborn</p>
+      </div>
+      <div>
+        <div class="skill-h">Building &amp; shipping</div>
+        <p class="skill-l">Streamlit · Supabase · Git/GitHub · REST APIs · ReportLab · openpyxl · scheduling and resource optimization algorithms</p>
+      </div>
+      <div>
+        <div class="skill-h">Working with people</div>
+        <p class="skill-l">Requirements gathering · stakeholder communication · documentation · project management · proposal writing</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="eyebrow">Credentials</span>
+    <div class="creds" style="margin-top:22px;">
+      <div>
+        <div class="skill-h">Education</div>
+        <div class="cred-row">
+          <div><strong>MS, Management &amp; Computer Information Systems</strong><span>Colorado State University</span></div>
+          <div class="cred-when">2023 — 2024</div>
+        </div>
+        <div class="cred-row">
+          <div><strong>PG, Data Science &amp; Engineering</strong><span>Great Learning</span></div>
+          <div class="cred-when">2021 — 2022</div>
+        </div>
+        <div class="cred-row">
+          <div><strong>MBA, Systems &amp; Marketing</strong><span>SRM Institute of Science &amp; Technology, Chennai</span></div>
+          <div class="cred-when">2017 — 2019</div>
+        </div>
+        <div class="cred-row">
+          <div><strong>BE, Computer Science</strong><span>Rajiv Gandhi College of Engineering &amp; Technology</span></div>
+          <div class="cred-when">2012 — 2016</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-h">Certifications</div>
+        <div class="cred-row">
+          <div><strong>Business Analyst Certification</strong><span>ThoughtSpot</span></div>
+          <div class="cred-when">Mar 2025</div>
+        </div>
+        <div class="cred-row">
+          <div><strong>Generative AI Fundamentals</strong><span>Databricks Academy</span></div>
+          <div class="cred-when">Feb 2025</div>
+        </div>
+        <div class="cred-row">
+          <div><strong>Lakehouse Fundamentals</strong><span>Databricks Academy</span></div>
+          <div class="cred-when">Dec 2024</div>
+        </div>
+        <div class="cred-row">
+          <div><strong>Job simulations — Data Analytics; Digital Intelligence</strong><span>Deloitte Australia; PwC Switzerland (via Forage)</span></div>
+          <div class="cred-when">Feb 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Looking for an analyst who closes the loop</h2>
+    <p>If your team needs someone who can take a business question, find the data behind it, check it holds up, and put it in front of people in a form they can act on — I would like to talk.</p>
+    <div class="cta-row" style="margin-top:0;">
+      <a class="btn btn-primary" href="mailto:hari8059@gmail.com">hari8059@gmail.com</a>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+      <a class="btn" href="https://github.com/hari-94" target="_blank" rel="noopener">github.com/hari-94</a>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Hari Prasath Ulaganathan — Silverthorne, Colorado</span>
+    <span>Open to relocation</span>
+  </div>
+
+</main>
