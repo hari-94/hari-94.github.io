@@ -55,6 +55,7 @@
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;scroll-padding-top:76px;}
   body{
+    margin:0;
     background:var(--ground);
     color:var(--ink);
     font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
@@ -99,11 +100,6 @@
   .sec-lede{color:var(--ink-soft);max-width:62ch;margin-bottom:32px;}
 
   /* ---------- hero ---------- */
-  .hero{padding-block:52px 56px;display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:start;}
-  .portrait{
-    width:126px;height:126px;border-radius:50%;object-fit:cover;
-    border:1px solid var(--rule-strong);box-shadow:var(--shadow);background:var(--surface-sunk);
-  }
   .hero-meta{
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.12em;
     text-transform:uppercase;color:var(--muted);margin-bottom:14px;
@@ -114,7 +110,6 @@
     text-transform:uppercase;padding:4px 10px;border-radius:2px;
     background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent);
   }
-  .hero h1{font-size:clamp(34px,6vw,50px);font-weight:700;letter-spacing:-.03em;margin-bottom:18px;}
   .thesis{font-size:clamp(17px,2.4vw,20px);line-height:1.5;color:var(--ink-soft);max-width:58ch;}
   .thesis strong{color:var(--ink);font-weight:600;}
   .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
@@ -127,10 +122,6 @@
   .btn:hover{border-color:var(--accent);color:var(--accent);}
   .btn-primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent);}
   .btn-primary:hover{opacity:.88;border-color:var(--accent);color:var(--on-accent);}
-  @media (max-width:640px){
-    .hero{grid-template-columns:1fr;gap:22px;padding-block:36px 44px;}
-    .portrait{width:96px;height:96px;}
-  }
 
   /* ---------- value pillars ---------- */
   .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
@@ -205,6 +196,49 @@
   @media (max-width:800px){
     .case{grid-template-columns:1fr;gap:16px;}
     .qa div{grid-template-columns:1fr;gap:3px;}
+  }
+
+  .solved{margin-top:18px;padding:14px 16px;border:1px solid var(--rule);border-radius:4px;background:var(--surface);}
+  .solved-h{
+    display:block;margin-bottom:8px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);
+  }
+  .solved li{font-size:14px;line-height:1.55;color:var(--ink-soft);padding-left:14px;position:relative;margin-bottom:7px;}
+  .solved li:last-child{margin-bottom:0;}
+  .solved li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--figure);}
+  .solved strong{color:var(--ink);font-weight:600;}
+  @media (min-width:801px){ .case .solved{grid-column:2;margin-top:-8px;} }
+
+  /* flow diagrams: hidden until the script draws them, so no empty panel without JS */
+  .flow{display:none;grid-column:1 / -1;margin:4px 0 0;border-radius:6px;overflow:hidden;
+    background:#070c12;border:1px solid #17222c;}
+  .flow.on{display:block;}
+  .flow-stage{position:relative;height:300px;
+    background-image:linear-gradient(rgba(120,140,230,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(120,140,230,.05) 1px,transparent 1px);
+    background-size:40px 40px;}
+  .flow canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  .flow-labels{position:absolute;inset:0;pointer-events:none;opacity:0;}
+  .flow-label{
+    position:absolute;transform:translate(-50%,-50%);text-align:center;
+    font:500 12.5px/1.2 "IBM Plex Sans",system-ui,sans-serif;color:#e3e9f5;
+  }
+  .flow-label.hi{color:#f6c38a;}
+  .flow-head{
+    position:absolute;top:18px;transform:translate(-50%,-50%);white-space:nowrap;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:#7c8aa6;
+  }
+  .flow figcaption{
+    padding:11px 16px;border-top:1px solid #17222c;font-size:13.5px;line-height:1.5;color:#aab6c8;
+  }
+  .flow figcaption b{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:10.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:#f0a44c;margin-right:8px;
+  }
+  @media (max-width:640px){
+    .flow-stage{height:470px;}
+    .flow-label{font-size:11px;}
   }
 
   /* ---------- experience ---------- */
@@ -308,6 +342,195 @@
     padding-top:12px;border-top:1px solid var(--rule);
   }
 
+  /* ---------- scroll progress ---------- */
+  .nav::after{
+    content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--figure));
+    transform:scaleX(var(--sp,0));transform-origin:left;
+  }
+
+  /* ---------- particle hero ----------
+     Always dark, whatever the page theme. With JS and motion on, the section
+     becomes a tall scroll track: the inner panel pins to the viewport while
+     the particles morph from the name into the real property, the packed
+     charts, the dbt lineage and the annual result, and the panel scrolls
+     away still holding the last figure.
+     Without either, it is a static dark hero with the name as real text. */
+  .hx{
+    --hx-bg:#060b10;--hx-ink:#e9f1f5;--hx-soft:#a9bcc8;--hx-muted:#6f8594;
+    --hx-teal:#5cc8e2;--hx-amber:#f0a44c;--hx-line:rgba(255,255,255,.1);
+    position:relative;background:var(--hx-bg);color:var(--hx-ink);
+    margin-top:-55px; /* slide under the sticky nav */
+  }
+  .anim .hx{height:440vh;}
+  .hx-pin{position:relative;min-height:100svh;overflow:hidden;}
+  .anim .hx-pin{position:sticky;top:0;height:100svh;min-height:0;}
+  .hx-pin::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(92,200,226,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(92,200,226,.055) 1px,transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 30%,transparent 80%);
+            mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 30%,transparent 80%);
+  }
+  .hx-pin::after{ /* soft glow behind the name */
+    content:"";position:absolute;left:50%;top:44%;width:80vw;height:60vh;transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side,rgba(129,140,248,.14),transparent);pointer-events:none;
+  }
+  .hx-cv{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:1;}
+  .anim .hx-cv{display:block;}
+
+  .hx-ui{
+    position:relative;z-index:2;min-height:100svh;height:100%;
+    display:flex;flex-direction:column;padding-top:86px;padding-bottom:34px;
+  }
+  .hx-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .hx .portrait{
+    width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;
+    border:1px solid rgba(92,200,226,.5);box-shadow:0 0 0 4px rgba(92,200,226,.08);
+  }
+  .hx .hero-meta{color:var(--hx-soft);margin:0 0 7px;}
+  .hx .status-line{margin:0;}
+  .hx .status-pill{background:rgba(92,200,226,.08);color:var(--hx-teal);border-color:rgba(92,200,226,.45);}
+
+  .hx-stage{flex:1;display:flex;align-items:center;min-height:190px;padding-block:18px;}
+  .hx-name{
+    font-size:clamp(44px,9.5vw,132px);font-weight:700;letter-spacing:-.035em;line-height:.92;
+    text-transform:uppercase;color:var(--hx-ink);
+  }
+  .anim .hx-name{ /* the particles draw it; the text stays for assistive tech */
+    position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;
+  }
+
+  .hx-bottom{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 40px;align-items:end;}
+  .hx .thesis{color:var(--hx-soft);font-size:clamp(16px,1.9vw,19px);}
+  .hx .thesis strong{color:var(--hx-ink);}
+  .hx .cta-row{margin:0;}
+  .hx .btn{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.18);color:var(--hx-ink);}
+  .hx .btn:hover{border-color:var(--hx-teal);color:var(--hx-teal);}
+  .hx .btn-primary{background:var(--hx-teal);border-color:var(--hx-teal);color:#04141b;}
+  .hx .btn-primary:hover{color:#04141b;opacity:.9;}
+  .hx a:focus-visible{outline-color:var(--hx-teal);}
+  @media (max-width:760px){ .hx-bottom{grid-template-columns:1fr;} }
+
+  .hx-cue{
+    display:none;position:absolute;right:22px;top:50%;transform:translateY(-50%);z-index:2;
+    writing-mode:vertical-rl;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.24em;
+    color:var(--hx-muted);text-align:center;pointer-events:none;
+  }
+  .anim .hx-cue{display:block;}
+  .hx-cue::after{
+    content:"";display:inline-block;width:1px;height:34px;margin-top:12px;
+    background:linear-gradient(var(--hx-teal),transparent);transform-origin:top;
+    animation:cue 1.8s ease-in-out infinite;
+  }
+  @keyframes cue{0%{transform:scaleY(0);}50%{transform:scaleY(1);}100%{transform:scaleY(1);opacity:0;}}
+  @media (max-width:760px){ .hx-cue{display:none!important;} }
+  .hx-fade{height:110px;background:linear-gradient(#060b10,var(--ground));}
+
+  /* captions for each scroll stage */
+  .hx-caps{display:none;}
+  .anim .hx-caps{display:block;position:absolute;left:0;right:0;bottom:7vh;z-index:3;pointer-events:none;}
+  .cap{
+    position:absolute;left:50%;bottom:0;width:min(680px,calc(100vw - 32px));
+    transform:translate(-50%,0);text-align:center;opacity:0;
+  }
+  .cap b{
+    display:block;margin-bottom:8px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--hx-amber);
+  }
+  .cap span{font-size:clamp(15px,1.8vw,19px);line-height:1.5;color:var(--hx-soft);}
+  .cap span em{font-style:normal;color:var(--hx-ink);}
+  .cap small{
+    display:block;margin-top:10px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.04em;color:var(--hx-muted);
+  }
+  .cap small a{color:var(--hx-teal);pointer-events:auto;text-decoration:none;border-bottom:1px solid rgba(92,200,226,.35);}
+  .cap small a:hover{border-bottom-color:var(--hx-teal);}
+
+  /* labels the engine pins onto the canvas: buildings, levels, model names */
+  .hx-labels{display:none;}
+  .anim .hx-labels{display:block;position:absolute;inset:0;z-index:2;pointer-events:none;}
+  .hx-label{
+    position:absolute;opacity:0;white-space:nowrap;transform:translateY(-50%);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;color:var(--hx-muted);
+  }
+  .hx-label-c{transform:translate(-50%,-50%);}
+  .hx-label-r{transform:translate(-100%,-50%);}
+  .hx-label-hi{color:var(--hx-amber);}
+  .hx-label-node{font-size:11.5px;letter-spacing:.02em;color:var(--hx-ink);}
+  @media (max-width:700px){
+    .hx-label{font-size:9px;letter-spacing:.06em;}
+    .hx-label-node{font-size:8.5px;letter-spacing:0;}
+    .hx-label-hi:not(.hx-label-node){white-space:normal;width:calc(100vw - 32px);text-align:center;line-height:1.5;}
+  }
+
+  /* nav reads light-on-dark while it sits over the hero */
+  .nav{transition:background .3s ease,border-color .3s ease;}
+  .nav.on-dark{background:rgba(6,11,16,.55);border-bottom-color:rgba(255,255,255,.08);}
+  .nav.on-dark .nav-name{color:#e9f1f5;}
+  .nav.on-dark .nav-links a{color:#8aa0ae;}
+  .nav.on-dark .nav-links a:hover{color:#5cc8e2;}
+
+  /* ---------- staggered children ---------- */
+  .anim .pillars .pillar,
+  .anim .case .metric{opacity:.3;transform:translateY(10px);
+      transition:opacity .5s ease, transform .55s cubic-bezier(.2,.7,.3,1);}
+  .anim .pillars.in .pillar,
+  .anim .case.in .metric{opacity:1;transform:none;}
+  .anim .pillars.in .pillar:nth-child(2){transition-delay:.08s;}
+  .anim .pillars.in .pillar:nth-child(3){transition-delay:.16s;}
+  .anim .pillars.in .pillar:nth-child(4){transition-delay:.24s;}
+  .anim .case.in .metric:nth-child(1){transition-delay:.2s;}
+  .anim .case.in .metric:nth-child(2){transition-delay:.3s;}
+  .anim .case.in .metric:nth-child(3){transition-delay:.4s;}
+
+  /* ---------- pipeline: scrubbed by scroll, then data keeps flowing ----------
+     Without JS the arrows stay as plain text arrows. With motion on, each
+     arrow becomes a track that fills as the diagram scrolls through view. */
+  .anim .pipe-node{transition:border-color .3s ease, color .3s ease, background .3s ease, box-shadow .3s ease;}
+  .anim .pipe-node.is-end:not(.lit){border-color:var(--rule-strong);color:var(--ink-soft);background:var(--surface);}
+  .anim .pipe-node.lit{border-color:var(--accent);color:var(--accent);}
+  .anim .pipe-node.is-end.lit{box-shadow:0 0 0 3px var(--accent-soft);}
+  .anim .pipe.flow .pipe-node.is-end{animation:glow 2.8s ease-in-out infinite;}
+  .anim .pipe-arrow{
+    position:relative;width:28px;height:10px;font-size:0;color:transparent;
+    background:linear-gradient(var(--rule-strong),var(--rule-strong)) 0 50%/100% 2px no-repeat;
+  }
+  .anim .pipe-arrow::after{
+    content:"";position:absolute;left:0;right:0;top:4px;height:2px;background:var(--accent);
+    transform:scaleX(var(--f,0));transform-origin:left;
+  }
+  .anim .pipe-arrow::before{
+    content:"";position:absolute;left:-3px;top:2px;width:6px;height:6px;border-radius:50%;
+    background:var(--figure);opacity:0;z-index:1;
+  }
+  .anim .pipe.flow .pipe-arrow::before{animation:packet 1.6s linear infinite;animation-delay:calc(var(--i,0) * .4s);}
+  @keyframes packet{
+    0%{transform:translateX(0);opacity:0;}
+    15%,85%{opacity:1;}
+    100%{transform:translateX(28px);opacity:0;}
+  }
+  @keyframes glow{0%,100%{box-shadow:0 0 0 3px var(--accent-soft);}50%{box-shadow:0 0 0 7px var(--accent-soft);}}
+
+  /* ---------- experience timeline ---------- */
+  .roles{position:relative;padding-left:26px;}
+  .roles::before,.roles::after{
+    content:"";position:absolute;left:4px;top:8px;bottom:22px;width:2px;background:var(--rule);
+  }
+  .roles::after{background:var(--accent);transform:scaleY(var(--tl,1));transform-origin:top;}
+  .role{position:relative;}
+  .role::before{
+    content:"";position:absolute;left:-26px;top:26px;width:10px;height:10px;border-radius:50%;
+    background:var(--accent-soft);border:2px solid var(--accent);z-index:1;
+  }
+  .role:first-child::before{top:6px;}
+  .anim .role::before{background:var(--ground);border-color:var(--rule-strong);
+      transition:border-color .3s ease, background .3s ease, box-shadow .3s ease;}
+  .anim .role.on::before{background:var(--accent-soft);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);}
+
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:.01ms!important;transition-duration:.01ms!important;}
@@ -328,25 +551,51 @@
   </div>
 </nav>
 
-<main class="wrap" id="top">
+<section class="hx" id="top">
+  <div class="hx-pin">
+    <canvas class="hx-cv" aria-hidden="true"></canvas>
 
-  <header class="hero">
-    <img class="portrait" src="hari.jpg" alt="Hari Prasath Ulaganathan">
-    <div>
-      <div class="hero-meta">Data Analyst &nbsp;·&nbsp; Silverthorne, Colorado &nbsp;·&nbsp; Open to relocation</div>
-      <div class="status-line">
-        <span class="status-pill">No visa sponsorship required</span>
-        <span class="status-pill">Valid EAD, no restrictions</span>
+    <div class="wrap hx-ui">
+      <div class="hx-top">
+        <img class="portrait" src="hari.jpg" alt="Hari Prasath Ulaganathan">
+        <div>
+          <div class="hero-meta">Data Analyst &nbsp;·&nbsp; Silverthorne, Colorado &nbsp;·&nbsp; Open to relocation</div>
+          <div class="status-line">
+            <span class="status-pill">No visa sponsorship required</span>
+            <span class="status-pill">Valid EAD, no restrictions</span>
+          </div>
+        </div>
       </div>
-      <h1>Hari Prasath Ulaganathan</h1>
-      <p class="thesis">I build the layer between raw data and the decision — <strong>modelling source data into tested, documented pipelines</strong>, then the dashboards and reports teams actually act on. Four-plus years across analytics, BI and reporting, in SQL, Python, dbt/Snowflake and Looker.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="mailto:hari8059@gmail.com">Email me</a>
-        <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
-        <a class="btn" href="https://github.com/hari-94" target="_blank" rel="noopener">GitHub</a>
+
+      <div class="hx-stage">
+        <h1 class="hx-name">Hari Prasath Ulaganathan</h1>
+      </div>
+
+      <div class="hx-bottom">
+        <p class="thesis">I build the layer between raw data and the decision — <strong>modelling source data into tested, documented pipelines</strong>, then the dashboards and reports teams actually act on. Four-plus years across analytics, BI and reporting, in SQL, Python, dbt/Snowflake and Looker.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:hari8059@gmail.com">Email me</a>
+          <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+          <a class="btn" href="https://github.com/hari-94" target="_blank" rel="noopener">GitHub</a>
+        </div>
       </div>
     </div>
-  </header>
+
+    <div class="hx-cue" aria-hidden="true">SCROLL</div>
+
+    <div class="hx-labels" aria-hidden="true"></div>
+
+    <div class="hx-caps">
+      <div class="cap"><b>01 · The problem</b><span>245 rooms across three buildings, <em>assigned by hand</em> every morning.</span><small>Real floor plans · illustrative day · <a href="#work">how it works ↓</a></small></div>
+      <div class="cap"><b>02 · The algorithm</b><span>Now an algorithm builds the charts: <em>fair workloads, less walking</em>, no rule broken.</span><small><a href="https://github.com/hari-94/BGV-Scheduling" target="_blank" rel="noopener">BGV-Scheduling</a> · <a href="#work">details ↓</a></small></div>
+      <div class="cap"><b>03 · The warehouse</b><span>Raw data modelled into <em>tested layers</em>, so the dashboard number can be trusted.</span><small><a href="https://github.com/hari-94/dbt_TS" target="_blank" rel="noopener">dbt_TS</a> · <a href="#work">details ↓</a></small></div>
+      <div class="cap"><b>04 · The result</b><span>What the tools <em>give back every year</em>.</span><small><a href="#work">See the case studies ↓</a></small></div>
+    </div>
+  </div>
+</section>
+<div class="hx-fade" aria-hidden="true"></div>
+
+<main class="wrap">
 
   <section class="sec" id="value">
     <span class="eyebrow">What I bring to a team</span>
@@ -388,8 +637,8 @@
         <dd>of manual work removed a year — <strong>2.3 hours every day</strong> across scheduling and budget entry</dd>
       </div>
       <div class="fig">
-        <dt data-count="25800" data-prefix="$">$25,800</dt>
-        <dd>cost avoided a year — <strong>$30/day</strong> in scheduling plus <strong>$1,500/month</strong> in curtailed expenses</dd>
+        <dt data-count="33600" data-prefix="$">$33,600</dt>
+        <dd>cost avoided a year — <strong>$60/day</strong> in scheduling plus <strong>$1,500/month</strong> in curtailed expenses</dd>
       </div>
       <div class="fig">
         <dt data-count="30401">30,401</dt>
@@ -404,13 +653,13 @@
 
     <div class="pipe">
       <span class="pipe-node">raw source</span>
-      <span class="pipe-arrow">&rarr;</span>
+      <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
       <span class="pipe-node">staging</span>
-      <span class="pipe-arrow">&rarr;</span>
+      <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
       <span class="pipe-node">intermediate</span>
-      <span class="pipe-arrow">&rarr;</span>
+      <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
       <span class="pipe-node">mart</span>
-      <span class="pipe-arrow">&rarr;</span>
+      <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
       <span class="pipe-node is-end">dashboard / report</span>
       <p class="pipe-cap">The dbt layering I use on Snowflake — each stage version-controlled, documented and testable, so a metric can be traced back to the row it came from.</p>
     </div>
@@ -434,14 +683,27 @@
           <div class="metrics">
             <div class="metric"><b data-count="1.3" data-dec="1" data-suffix=" hrs">1.3 hrs</b><span>saved daily</span></div>
             <div class="metric"><b data-count="338" data-suffix=" hrs">338 hrs</b><span>a year</span></div>
-            <div class="metric"><b data-count="7800" data-prefix="$">$7,800</b><span>cost avoided / yr</span></div>
+            <div class="metric"><b data-count="15600" data-prefix="$">$15,600</b><span>cost avoided / yr</span></div>
           </div>
         </div>
         <dl class="qa">
           <div><dt>Problem</dt><dd>Room assignments across housekeeping staff were set by hand every morning, and quality inspectors were routed in a way that sent them back and forth between floors.</dd></div>
           <div><dt>Built</dt><dd>A scheduling automation tool implementing custom tight-packing and greedy-packing algorithms to assign Full Clean and Daily Service rooms across staff, plus re-engineered inspector group assignment to run sequentially by floor.</dd></div>
-          <div><dt>Outcome</dt><dd class="out">Cut 1.3 hours of manual scheduling a day and about $30 a day in operating cost, and produced a composite report the department did not previously have — room assignment moved from hand-built to algorithmic.</dd></div>
+          <div><dt>Outcome</dt><dd class="out">Cut 1.3 hours of manual scheduling a day and about $60 a day in operating cost, and produced a composite report the department did not previously have — room assignment moved from hand-built to algorithmic.</dd></div>
         </dl>
+        <div class="solved">
+          <span class="solved-h">What it solved</span>
+          <ul>
+            <li><strong>Schedule ready in seconds.</strong> The morning plan that took over an hour by hand is built instantly.</li>
+            <li><strong>Fair workloads.</strong> Every housekeeper gets a realistic, balanced day.</li>
+            <li><strong>Less walking.</strong> Each person's rooms are grouped close together instead of spread across the resort.</li>
+            <li><strong>Easy to use.</strong> Staff see their rooms on their phone, in English or Spanish.</li>
+          </ul>
+        </div>
+        <figure class="flow" data-flow="sched">
+          <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
+          <figcaption><b>How it works</b> The morning room list, the staff sheet and the floor plans go in. A plan in walking order comes out on every housekeeper's phone.</figcaption>
+        </figure>
       </article>
 
       <article class="case rv">
@@ -463,6 +725,19 @@
           <div><dt>Built</dt><dd>A full-stack budget application on a relational database with vendor management and database-enforced duplicate-expense prevention, a live dashboard showing month-over-month variance and over-budget alerts, and automated PDF reporting for stakeholders. I owned deployment through GitHub and Streamlit Cloud.</dd></div>
           <div><dt>Outcome</dt><dd class="out">Removed an hour of manual Excel entry a day and gave the department visibility that curtailed expenses by at least $1,500 a month — the data now validates itself and the monthly report generates itself.</dd></div>
         </dl>
+        <div class="solved">
+          <span class="solved-h">What it solved</span>
+          <ul>
+            <li><strong>One source of truth.</strong> The whole budget lives in one app instead of scattered spreadsheets.</li>
+            <li><strong>No double counting.</strong> The same expense can't be entered twice.</li>
+            <li><strong>Clear accountability.</strong> It shows who changed what, and when.</li>
+            <li><strong>No surprises.</strong> Spending against budget is visible at a glance, with a warning before it runs over.</li>
+          </ul>
+        </div>
+        <figure class="flow" data-flow="budget">
+          <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
+          <figcaption><b>How it works</b> Every expense, old or new, is checked and stored once. That one copy feeds the dashboard, the alerts and the monthly report.</figcaption>
+        </figure>
       </article>
 
       <article class="case rv">
@@ -483,6 +758,14 @@
           <div><dt>Built</dt><dd>A Python/openpyxl ETL pipeline that cleaned and transformed the workbook into 30,401 structured shift records across 181 employees, then ran quantitative trend, clustering, travel and workload-balance comparisons across them.</dd></div>
           <div><dt>Outcome</dt><dd class="out">Scheduling policy could be argued from measured history rather than recollection.</dd></div>
         </dl>
+        <div class="solved">
+          <span class="solved-h">What it solved</span>
+          <ul>
+            <li><strong>Years of data made usable.</strong> Scattered scheduling sheets turned into one clean dataset.</li>
+            <li><strong>Patterns made visible.</strong> Who works when, and how evenly the work is shared.</li>
+            <li><strong>Better planning.</strong> Staffing decisions are now based on facts, not memory.</li>
+          </ul>
+        </div>
       </article>
 
       <article class="case rv">
@@ -753,5 +1036,764 @@
 
     sections.forEach(function (s) { navObs.observe(s); });
   }
+
+  // Section labels decode like a data feed the first time they come into view.
+  if (!reduce) {
+    var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#_";
+    var scramble = function (el) {
+      var text = el.textContent;
+      var duration = 650;
+      var started = null;
+      var step = function (ts) {
+        if (started === null) started = ts;
+        var p = Math.min(1, (ts - started) / duration);
+        var shown = Math.floor(p * text.length);
+        var out = text.slice(0, shown);
+        for (var i = shown; i < text.length; i++) {
+          out += text[i] === " " ? " " : glyphs[(Math.random() * glyphs.length) | 0];
+        }
+        el.textContent = out;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = text;
+      };
+      requestAnimationFrame(step);
+    };
+    var labelObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        scramble(e.target);
+        labelObs.unobserve(e.target);
+      });
+    }, { threshold: 1 });
+    document.querySelectorAll(".eyebrow").forEach(function (el) { labelObs.observe(el); });
+  }
+
+  // Scroll-linked motion: progress bar, pipeline fill and the
+  // experience timeline. One rAF-throttled pass per frame.
+  var root = document.documentElement;
+  var hx = document.querySelector(".hx");
+  var nav = document.querySelector(".nav");
+  var pipe = document.querySelector(".pipe");
+  var pipeNodes = pipe ? pipe.querySelectorAll(".pipe-node") : [];
+  var pipeArrows = pipe ? pipe.querySelectorAll(".pipe-arrow") : [];
+  var roles = document.querySelector(".roles");
+  var roleItems = roles ? roles.querySelectorAll(".role") : [];
+  var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+
+  Array.prototype.forEach.call(pipeArrows, function (a, i) { a.style.setProperty("--i", i); });
+
+  var update = function () {
+    ticking = false;
+    var y = window.scrollY || window.pageYOffset;
+    var vh = window.innerHeight;
+    var max = root.scrollHeight - vh;
+    root.style.setProperty("--sp", max > 0 ? (y / max).toFixed(4) : 0);
+    if (hx && nav) nav.classList.toggle("on-dark", hx.getBoundingClientRect().bottom > 56);
+    if (reduce) return;
+
+    if (pipe) {
+      var start = vh * 0.92, end = vh * 0.45;
+      var p = clamp((start - pipe.getBoundingClientRect().top) / (start - end));
+      var seg = p * pipeArrows.length;
+      Array.prototype.forEach.call(pipeArrows, function (a, i) {
+        a.style.setProperty("--f", clamp(seg - i).toFixed(3));
+      });
+      Array.prototype.forEach.call(pipeNodes, function (n, i) {
+        n.classList.toggle("lit", i === 0 ? p > 0 : seg - (i - 1) >= 1);
+      });
+      pipe.classList.toggle("flow", p >= 1);
+    }
+
+    if (roles) {
+      var line = vh * 0.62;
+      var r = roles.getBoundingClientRect();
+      roles.style.setProperty("--tl", clamp((line - r.top) / r.height).toFixed(4));
+      Array.prototype.forEach.call(roleItems, function (el) {
+        el.classList.toggle("on", el.getBoundingClientRect().top + 24 < line);
+      });
+    }
+  };
+
+  var ticking = false;
+  var onScroll = function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+
+  // ---------------------------------------------------------------------
+  // Particle hero. Every particle has a target position, colour and size in
+  // each shape; scroll progress through the .hx track picks which two shapes
+  // it sits between, and a spring pulls each particle toward the blend.
+  //   0 name
+  //   1 the property: every guest room from BGV-Scheduling/property_map.py
+  //   2 the same rooms packed into charts under fcpack.py's hard rules
+  //   3 the dbt_TS lineage: its 15 models and their real ref() edges
+  //   4 the annual result
+  // ---------------------------------------------------------------------
+  if (hx && !reduce) (function () {
+    var pin = hx.querySelector(".hx-pin");
+    var cv = hx.querySelector(".hx-cv");
+    var ctx = cv.getContext("2d");
+    var stage = hx.querySelector(".hx-stage");
+    var ui = hx.querySelector(".hx-ui");
+    var cue = hx.querySelector(".hx-cue");
+    var caps = hx.querySelectorAll(".cap");
+    var labelLayer = hx.querySelector(".hx-labels");
+    if (!ctx) return;
+
+    var POS = [0, 0.19, 0.41, 0.63, 0.85];   // scroll progress where each shape is fully formed
+    // 0-2 base tones, 3 dim room, 4 structure, 5 dust, 6 bridge, 7+ one per chart
+    var COL = ["#5cc8e2", "#c9d2ff", "#f0a44c", "#34505e", "#1d3a48", "#12232c", "#3f8ea3",
+      "#5cc8e2", "#f0a44c", "#b18cff", "#6fdc8c", "#ff7aa8", "#ffd84c",
+      "#4c8dff", "#ff8c5c", "#8ef0e0", "#e0a0ff", "#a8e05c", "#ff5c7a"];
+    var NCH = COL.length - 7;
+    // Text and model boxes take their colour from where they sit: cyan at the
+    // left edge through blue and violet to pink at the right. GR marks them.
+    var GRAD = ["#2f5bea", "#3a4fe6", "#4a44e0", "#5b3ddc", "#6d34d8", "#8230d2", "#9a2cc6", "#b327b4"];
+    var GR = 250, GBASE = COL.length;
+    COL = COL.concat(GRAD);
+    // Enough particles to keep letters solid on big screens, capped for frame rate.
+    var N = Math.round(Math.min(7500, Math.max(1800, window.innerWidth * window.innerHeight / 210)));
+    var px = new Float32Array(N), py = new Float32Array(N);
+    var vx = new Float32Array(N), vy = new Float32Array(N);
+    var tone = new Uint8Array(N);
+    var lag = new Float32Array(N);
+    var shapes = [], charts = [], labels = [];
+    var W = 0, H = 0, dpr = 1, base = 2, mobile = false;
+    var mx = -1e4, my = -1e4;
+    var born = 0, running = false, built = false;
+
+    var smooth = function (t) { return t * t * (3 - 2 * t); };
+    var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+
+    for (var i = 0; i < N; i++) {
+      var r = Math.random();
+      tone[i] = r < 0.18 ? 2 : r < 0.36 ? 1 : 0;
+      lag[i] = Math.random();
+    }
+
+    // A tiny seeded PRNG so the illustrative day is the same on every visit.
+    var seeded = function (s) { return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; };
+
+    var blank = function () {
+      var sh = { x: new Float32Array(N), y: new Float32Array(N), c: new Uint8Array(N), s: new Float32Array(N) };
+      for (var k = 0; k < N; k++) { sh.c[k] = tone[k]; sh.s[k] = base; }
+      return sh;
+    };
+    var dust = function (sh, k) {
+      sh.x[k] = Math.random() * W; sh.y[k] = Math.random() * H; sh.c[k] = 5; sh.s[k] = base * 0.8;
+    };
+
+    // ---- text ----------------------------------------------------------
+    var textShape = function (lines, box) {
+      var off = document.createElement("canvas");
+      off.width = Math.max(1, Math.ceil(box.w));
+      off.height = Math.max(1, Math.ceil(box.h));
+      var c = off.getContext("2d");
+      c.font = "700 100px Archivo, sans-serif";
+      var widest = 0;
+      lines.forEach(function (l) { widest = Math.max(widest, c.measureText(l).width); });
+      var fs = Math.min(box.w * 0.98 / widest * 100, box.h / (lines.length * 0.92));
+      c.font = "700 " + fs + "px Archivo, sans-serif";
+      c.textAlign = "center"; c.textBaseline = "middle"; c.fillStyle = "#fff";
+      var lh = fs * 0.92, top = box.h / 2 - lh * (lines.length - 1) / 2;
+      lines.forEach(function (l, k) { c.fillText(l, box.w / 2, top + k * lh); });
+      var data = c.getImageData(0, 0, off.width, off.height).data;
+      var ow = off.width, oh = off.height;
+      var inked = function (x, y) { return data[((y | 0) * ow + (x | 0)) * 4 + 3] > 140; };
+      // Lay the particles on an even grid sized so there is about one per cell,
+      // like a halftone, rather than scattering them at random (which clumps
+      // in some strokes and leaves holes in others).
+      var area = 0;
+      for (var y0 = 0; y0 < oh; y0 += 2) for (var x0 = 0; x0 < ow; x0 += 2) if (inked(x0, y0)) area += 4;
+      var step = Math.max(1, Math.sqrt(area / N) * 1.03), pts = [];
+      for (var y = step / 2; y < oh; y += step)
+        for (var x = step / 2; x < ow; x += step)
+          if (inked(x, y)) pts.push(box.x + x, box.y + y);
+      var count = pts.length / 2;
+      for (var q = count - 1; q > 0; q--) {      // shuffle, so the morph comes from everywhere at once
+        var j = (Math.random() * (q + 1)) | 0, tx = pts[q * 2], ty = pts[q * 2 + 1];
+        pts[q * 2] = pts[j * 2]; pts[q * 2 + 1] = pts[j * 2 + 1]; pts[j * 2] = tx; pts[j * 2 + 1] = ty;
+      }
+      var dot = Math.min(5, Math.max(base, step * 0.78));
+      var sh = blank();
+      for (var k = 0; k < N; k++) {
+        var p = (k % count) * 2;
+        sh.x[k] = pts[p] + (Math.random() - 0.5) * step * 0.2;
+        sh.y[k] = pts[p + 1] + (Math.random() - 0.5) * step * 0.2;
+        sh.c[k] = tone[k] === 1 ? 1 : GR;
+        sh.s[k] = dot;
+      }
+      return sh;
+    };
+
+    // ---- the property --------------------------------------------------
+    // Floor plates copied from BGV-Scheduling/property_map.py: num+unit:row:x.
+    // Row 0 is the north side of the corridor, 1 the south; x is in door widths.
+    var P = function (s) { return s.split(" ").map(function (t) { var a = t.split(":"); return [a[0], +a[1], +a[2]]; }); };
+    var B1_TOWER = P("26B:0:0.6 26A:0:1.5 24H:0:2.4 24G:0:3.3 24E:0:4.1 24F:0:5 22H:0:9 22G:0:9.9 22E:0:10.9 22F:0:11.8 20E:0:12.8 20G:0:14.1 20H:0.7:14.1 20I:1.2:14.1 23D:1:1.7 23C:1:2.8 23B:1:3.8 23A:1:4.9 21D:1:7.3 21C:1:8.5 21B:1:9.9 21A:1:11.4");
+    var B1_L4_EAST = P("20A:0:14.1 20B:1:14.1");
+    var B1_STRIP = P("10A:1:4.5 10B:1:5.5 10C:1:6.7 10D:1:8 12A:1:9.4 12B:1:10.7");
+    var B2_TOWER = P("36G:0:0.4 36E:0:1.6 34A:0:3.6 34B:0:4.7 32H:0:6.7 32G:0:7.7 32E:0:8.7 32F:0:9.6 36H:1:0.7 36I:1:1.8 35B:1:3 35A:1:4.3 33D:1:6.6 33C:1:8 33B:1:9.4 33A:1:10.8 31B:0.6:12.4 31A:1:12.2");
+    var B2_L4 = P("32A:0:7.7 32B:0:8.6");
+    var B3_PLATE = P("46E:0:0.5 46G:0.5:0.5 51H:0:2.2 51G:0:3 51E:0:3.8 51F:0:4.7 49F:0:5.5 49E:0:6.3 49G:0:7.2 49H:0:8 47A:0:9.6 45A:0:10.4 43A:0:11.2 41B:0:12.7 41A:0:13.6 46H:1:0.5 46I:1:1.4 44A:1:2.2 44B:1:3.1 42B:1:5.1 42A:1:6.3 40D:1:9.8 40C:1:11 40B:1:12.2 40A:1:13.4");
+    var LEVELS = ["Plaza", "Terrace", "1", "2", "3", "4", "5"];
+    var BRIDGES = [[1, 2, ["Plaza", "Terrace", "1", "2"]], [1, 3, ["Plaza", "1"]]];   // no 2<->3 bridge
+    var ORDER = [3, 1, 2];                                                              // west to east
+
+    var rooms = (function () {
+      var out = [];
+      var add = function (bld, level, plate, skip) {
+        plate.forEach(function (d) {
+          if (skip && skip(d[0])) return;
+          out.push({ bld: bld, lv: LEVELS.indexOf(level), key: bld + level + d[0].slice(0, 2), row: d[1], x: d[2] });
+        });
+      };
+      add(1, "Plaza", B1_STRIP); add(1, "Terrace", B1_STRIP);
+      add(1, "2", B1_TOWER); add(1, "3", B1_TOWER);
+      add(1, "4", B1_TOWER, function (u) { return /^20[GHI]$/.test(u); }); add(1, "4", B1_L4_EAST);
+      add(1, "5", B1_TOWER, function (u) { return !/^2[346]/.test(u); });   // level 5 is only the west end
+      add(2, "1", B2_TOWER, function (u) { return /^3[13]/.test(u); });     // theatres and lobby
+      add(2, "2", B2_TOWER); add(2, "3", B2_TOWER);
+      add(2, "4", B2_TOWER, function (u) { return /^32[EFGH]$/.test(u); }); add(2, "4", B2_L4);
+      ["Plaza", "Terrace", "1", "2", "3"].forEach(function (lv) { add(3, lv, B3_PLATE); });
+      return out;
+    })();
+    var R = rooms.length;
+
+    // Today's Full Cleans: whole apartments at a time, since a guest checks out of all of it.
+    (function () {
+      var rnd = seeded(20250801), byKey = {};
+      rooms.forEach(function (rm) { (byKey[rm.key] = byKey[rm.key] || []).push(rm); });
+      Object.keys(byKey).forEach(function (k) {
+        var fc = rnd() < 0.27;
+        byKey[k].forEach(function (rm) { rm.fc = fc; });
+      });
+    })();
+
+    // Pack the Full Cleans into charts, following fcpack.py's rules in miniature:
+    // an apartment is never split, a chart never holds rooms in both buildings 2
+    // and 3, and rooms are taken in walking order so each chart stays compact.
+    var packCharts = function () {
+      var bundles = {}, list = [];
+      rooms.forEach(function (rm, idx) {
+        if (!rm.fc) return;
+        if (!bundles[rm.key]) { bundles[rm.key] = { bld: rm.bld, lv: rm.lv, x: rm.x, rooms: [] }; list.push(bundles[rm.key]); }
+        bundles[rm.key].rooms.push(idx);
+      });
+      list.sort(function (a, b) {
+        return ORDER.indexOf(a.bld) - ORDER.indexOf(b.bld) || a.lv - b.lv || a.x - b.x;
+      });
+      // A bridge costs more than a lift ride, which costs more than a corridor:
+      // change building only on a fresh chart, and change floor only while the
+      // chart is still short.
+      var out = [], cur = null, CAP = 6;
+      list.forEach(function (b) {
+        var fresh = !cur || cur.bld !== b.bld ||
+          (cur.lv !== b.lv && cur.rooms.length >= 3) ||
+          cur.rooms.length + b.rooms.length > CAP;
+        if (fresh) { cur = { rooms: [], bld: b.bld }; out.push(cur); }
+        cur.lv = b.lv;
+        b.rooms.sort(function (p, q) { return rooms[p].x - rooms[q].x; });
+        cur.rooms = cur.rooms.concat(b.rooms);
+      });
+      return out;
+    };
+
+    var propertyGeometry = function (box) {
+      var widths = { 3: 14.2, 1: 14.8, 2: 13 }, gap = 5;
+      var units = widths[3] + widths[1] + widths[2] + gap * 2;
+      var u = box.w / units, left = {}, xAt = box.x;
+      ORDER.forEach(function (b) { left[b] = xAt; xAt += (widths[b] + gap) * u; });
+      var lvH = box.h / LEVELS.length;
+      var rowGap = Math.min(lvH * 0.34, u * 1.1);
+      return {
+        u: u, left: left, widths: widths, lvH: lvH, rowGap: rowGap,
+        ry: function (lv) { return box.y + box.h - (lv + 1) * lvH + lvH * 0.18; },
+        rx: function (bld, x) { return left[bld] + (x + 0.4) * u; }
+      };
+    };
+
+    var propertyShape = function (box, packed) {
+      var g = propertyGeometry(box), sh = blank();
+      var roomSize = Math.max(3, Math.min(7, g.u * 0.7));
+      var chartOf = new Int16Array(R).fill(-1);
+      if (packed) charts.forEach(function (ch, ci) { ch.rooms.forEach(function (ri) { chartOf[ri] = ci; }); });
+      for (var k = 0; k < R && k < N; k++) {
+        var rm = rooms[k];
+        sh.x[k] = g.rx(rm.bld, rm.x);
+        sh.y[k] = g.ry(rm.lv) + rm.row * g.rowGap;
+        sh.s[k] = roomSize;
+        sh.c[k] = !rm.fc ? 3 : packed ? 7 + (chartOf[k] % NCH) : 2;
+      }
+      // Slabs under each level that has rooms, and the bridges between buildings.
+      var segs = [];
+      var levelsOf = { 1: [0, 1, 3, 4, 5, 6], 2: [2, 3, 4, 5], 3: [0, 1, 2, 3, 4] };
+      ORDER.forEach(function (b) {
+        levelsOf[b].forEach(function (lv) {
+          var y = g.ry(lv) + g.rowGap * 1.9;
+          segs.push([g.left[b], y, g.left[b] + (g.widths[b] + 0.8) * g.u, y, 4]);
+        });
+      });
+      BRIDGES.forEach(function (br) {
+        var a = br[0], b = br[1], west = ORDER.indexOf(a) < ORDER.indexOf(b) ? a : b, east = west === a ? b : a;
+        br[2].forEach(function (lvName) {
+          var y = g.ry(LEVELS.indexOf(lvName)) + g.rowGap * 0.5;
+          segs.push([g.left[west] + (g.widths[west] + 0.8) * g.u, y, g.left[east], y, 6]);
+        });
+      });
+      var total = 0;
+      segs.forEach(function (s) { total += Math.abs(s[2] - s[0]); });
+      var structN = Math.min(N - R, Math.round(total / 2.2));
+      for (var k2 = R; k2 < N; k2++) {
+        if (k2 - R < structN) {
+          var d = Math.random() * total, si = 0;
+          while (d > Math.abs(segs[si][2] - segs[si][0]) && si < segs.length - 1) { d -= Math.abs(segs[si][2] - segs[si][0]); si++; }
+          var s = segs[si];
+          sh.x[k2] = s[0] + d; sh.y[k2] = s[1] + (Math.random() - 0.5) * 1.2;
+          sh.c[k2] = s[4]; sh.s[k2] = base * 0.9;
+        } else dust(sh, k2);
+      }
+      sh.geo = g;
+      return sh;
+    };
+
+    // ---- the dbt lineage -----------------------------------------------
+    var MODELS = [
+      ["raw_projects", 0], ["raw_resources", 0], ["raw_allocations", 0], ["raw_tickets", 0],
+      ["stg_projects", 1], ["stg_resources", 1], ["stg_allocations", 1], ["stg_tickets", 1],
+      ["int_allocation_cost", 2], ["int_ticket_resolution", 2],
+      ["dim_project", 3], ["dim_resource", 3], ["fct_allocation", 3], ["fct_ticket", 3],
+      ["rpt_project_health", 4]
+    ];
+    var REFS = [   // child <- parent, from each model's ref() calls
+      ["stg_projects", "raw_projects"], ["stg_resources", "raw_resources"],
+      ["stg_allocations", "raw_allocations"], ["stg_tickets", "raw_tickets"],
+      ["int_allocation_cost", "stg_allocations"], ["int_allocation_cost", "stg_resources"],
+      ["int_ticket_resolution", "stg_tickets"],
+      ["dim_project", "stg_projects"], ["dim_resource", "stg_allocations"], ["dim_resource", "stg_resources"],
+      ["fct_allocation", "int_allocation_cost"], ["fct_ticket", "int_ticket_resolution"],
+      ["rpt_project_health", "dim_project"], ["rpt_project_health", "fct_allocation"], ["rpt_project_health", "fct_ticket"]
+    ];
+
+    var dagShape = function (box) {
+      var sh = blank(), nodes = {}, cols = [[], [], [], [], []];
+      MODELS.forEach(function (m) { cols[m[1]].push(m[0]); });
+      var vertical = mobile;
+      var nw = vertical ? Math.min(92, box.w / 4 - 6) : Math.min(176, box.w / 5 - 24);
+      var nh = vertical ? 26 : 30;
+      cols.forEach(function (names, ci) {
+        names.forEach(function (name, ni) {
+          var along = (ni + 0.5) / names.length, cx, cy;
+          if (vertical) { cx = box.x + along * box.w; cy = box.y + (ci + 0.5) / 5 * box.h; }
+          else { cx = box.x + (ci + 0.5) / 5 * box.w; cy = box.y + along * box.h; }
+          nodes[name] = { cx: cx, cy: cy, w: nw, h: nh, layer: ci };
+        });
+      });
+      var edges = REFS.map(function (e) { return [nodes[e[1]], nodes[e[0]]]; });
+      var nodeN = Math.round(N * 0.5), edgeN = Math.round(N * 0.38);
+      var names = Object.keys(nodes);
+      for (var k = 0; k < N; k++) {
+        if (k < nodeN) {                         // node outlines
+          var nd = nodes[names[k % names.length]], t = Math.random() * 2 * (nd.w + nd.h);
+          var x = t < nd.w ? t : t < nd.w + nd.h ? nd.w : t < 2 * nd.w + nd.h ? 2 * nd.w + nd.h - t : 0;
+          var y = t < nd.w ? 0 : t < nd.w + nd.h ? t - nd.w : t < 2 * nd.w + nd.h ? nd.h : 2 * (nd.w + nd.h) - t;
+          sh.x[k] = nd.cx - nd.w / 2 + x; sh.y[k] = nd.cy - nd.h / 2 + y;
+          sh.c[k] = nd.layer === 4 ? 2 : GR;
+          sh.s[k] = base * 0.9;
+        } else if (k < nodeN + edgeN) {          // rows flowing along the edges
+          sh.c[k] = 2; sh.s[k] = base;
+        } else dust(sh, k);
+      }
+      // Edge particles move, so their targets are computed each frame.
+      var edgeOf = new Int16Array(N).fill(-1), phase = new Float32Array(N);
+      for (var k2 = nodeN; k2 < nodeN + edgeN; k2++) { edgeOf[k2] = k2 % edges.length; phase[k2] = Math.random(); }
+      sh.dyn = function (k, tsec, out) {
+        var e = edgeOf[k] < 0 ? null : edges[edgeOf[k]];
+        if (!e) return false;
+        var t = (phase[k] + tsec * 0.16) % 1, a = e[0], b = e[1];
+        var x0, y0, x3, y3, x1, y1, x2, y2;
+        if (vertical) { x0 = a.cx; y0 = a.cy + a.h / 2; x3 = b.cx; y3 = b.cy - b.h / 2; x1 = x0; x2 = x3; y1 = y2 = (y0 + y3) / 2; }
+        else { x0 = a.cx + a.w / 2; y0 = a.cy; x3 = b.cx - b.w / 2; y3 = b.cy; y1 = y0; y2 = y3; x1 = x2 = (x0 + x3) / 2; }
+        var m = 1 - t;
+        out[0] = m * m * m * x0 + 3 * m * m * t * x1 + 3 * m * t * t * x2 + t * t * t * x3;
+        out[1] = m * m * m * y0 + 3 * m * m * t * y1 + 3 * m * t * t * y2 + t * t * t * y3;
+        return true;
+      };
+      sh.nodes = nodes;
+      return sh;
+    };
+
+    // ---- labels --------------------------------------------------------
+    var label = function (text, x, y, stages, cls) {
+      var el = document.createElement("span");
+      el.className = "hx-label" + (cls ? " " + cls : "");
+      el.textContent = text;
+      el.style.left = x.toFixed(1) + "px";
+      el.style.top = y.toFixed(1) + "px";
+      labelLayer.appendChild(el);
+      labels.push({ el: el, stages: stages });
+    };
+
+    var build = function () {
+      var rect = pin.getBoundingClientRect();
+      W = rect.width; H = rect.height;
+      mobile = W < 700;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(W * dpr);
+      cv.height = Math.round(H * dpr);
+      base = mobile ? 1.7 : 2.1;
+
+      var s = stage.getBoundingClientRect();
+      var nameBox = { x: s.left - rect.left, y: s.top - rect.top + 10, w: s.width, h: s.height - 20 };
+      var nameLines = nameBox.w > 720 ? ["HARI PRASATH", "ULAGANATHAN"] : ["HARI", "PRASATH", "ULAGANATHAN"];
+      var side = mobile ? 16 : Math.max(24, (W - 1180) / 2);
+      var propBox = { x: side + (mobile ? 0 : 40), y: H * (mobile ? 0.2 : 0.17), w: W - side * 2 - (mobile ? 0 : 40), h: H * (mobile ? 0.36 : 0.46) };
+      var dagBox = mobile ? { x: 12, y: H * 0.13, w: W - 24, h: H * 0.52 }
+                          : { x: side, y: H * 0.17, w: W - side * 2, h: H * 0.46 };
+      var numBox = { x: W * 0.08, y: H * 0.14, w: W * 0.84, h: H * 0.54 };
+
+      charts = packCharts();
+      var prop = propertyShape(propBox, false);
+      var dag = dagShape(dagBox);
+      shapes = [
+        textShape(nameLines, nameBox),
+        prop,
+        propertyShape(propBox, true),
+        dag,
+        textShape(["598 HRS", "$33,600"], numBox)
+      ];
+
+      // Labels: buildings and levels for the property, model names for the DAG.
+      labels.forEach(function (l) { l.el.remove(); });
+      labels = [];
+      var g = prop.geo;
+      ORDER.forEach(function (b) {
+        label("BLDG " + b, g.left[b] + g.widths[b] * g.u / 2, propBox.y + propBox.h + 16, [1, 2], "hx-label-c");
+      });
+      if (!mobile) LEVELS.forEach(function (lv, i) {
+        label(lv === "Plaza" || lv === "Terrace" ? lv.toUpperCase() : "L" + lv, g.left[3] - 14, g.ry(i) + g.rowGap * 0.5, [1, 2], "hx-label-r");
+      });
+      var fcCount = rooms.filter(function (rm) { return rm.fc; }).length;
+      label(fcCount + " rooms need a Full Clean today", W / 2, propBox.y - 30, [1], "hx-label-c hx-label-hi");
+      label(fcCount + " rooms → " + charts.length + " charts  ·  0 apartments split  ·  0 charts across bldgs 2 + 3",
+        W / 2, propBox.y - 30, [2], "hx-label-c hx-label-hi");
+      Object.keys(dag.nodes).forEach(function (name) {
+        var nd = dag.nodes[name];
+        label(name, nd.cx, nd.cy, [3], "hx-label-c hx-label-node" + (nd.layer === 4 ? " hx-label-hi" : ""));
+      });
+      if (!mobile) ["raw", "staging", "intermediate", "marts", "report"].forEach(function (t, ci) {
+        label(t.toUpperCase(), dagBox.x + (ci + 0.5) / 5 * dagBox.w, dagBox.y - 30, [3], "hx-label-c");
+      });
+
+      if (!built) { // first build: start as raw noise across the whole panel
+        for (var k = 0; k < N; k++) { px[k] = Math.random() * W; py[k] = Math.random() * H; }
+        born = performance.now();
+        built = true;
+      }
+    };
+
+    var progress = function () {
+      var r = hx.getBoundingClientRect();
+      var track = r.height - H;
+      return track > 0 ? clamp(-r.top / track) : 0;
+    };
+
+    var tmpA = [0, 0], tmpB = [0, 0];
+    var buckets = COL.map(function () { return []; });
+
+    var frame = function (now) {
+      if (!running) return;
+      var p = progress();
+
+      // Which two shapes are we between? Each segment holds its shape for the
+      // first 40% of its scroll, then morphs over the rest.
+      var k = POS.length - 1, t = 0;
+      for (var s = 0; s < POS.length - 1; s++) {
+        if (p < POS[s + 1]) { k = s; t = smooth(clamp(((p - POS[s]) / (POS[s + 1] - POS[s]) - 0.4) / 0.6)); break; }
+      }
+      var A = shapes[k], B = shapes[Math.min(k + 1, POS.length - 1)];
+      var intro = clamp((now - born - 250) / 1500);
+      var tsec = now * 0.001;
+      var weight = function (st) { return st === k ? 1 - t : st === k + 1 ? t : 0; };
+
+      for (var b = 0; b < buckets.length; b++) buckets[b].length = 0;
+
+      for (var i = 0; i < N; i++) {
+        var e = easeOut(clamp(t * 1.5 - lag[i] * 0.5));
+        var ax0 = A.x[i], ay0 = A.y[i], bx0 = B.x[i], by0 = B.y[i];
+        if (A.dyn && A.dyn(i, tsec, tmpA)) { ax0 = tmpA[0]; ay0 = tmpA[1]; }
+        if (B.dyn && B.dyn(i, tsec, tmpB)) { bx0 = tmpB[0]; by0 = tmpB[1]; }
+        var tx = ax0 + (bx0 - ax0) * e, ty = ay0 + (by0 - ay0) * e;
+        if (intro < 1) {
+          var ib = easeOut(clamp(intro * 1.7 - lag[i] * 0.7));
+          tx = px[i] + (tx - px[i]) * ib;
+          ty = py[i] + (ty - py[i]) * ib;
+        }
+        var ax = (tx - px[i]) * 0.08, ay = (ty - py[i]) * 0.08;
+        var dx = px[i] - mx, dy = py[i] - my, d2 = dx * dx + dy * dy;
+        if (d2 < 8100 && d2 > 0.01) {                // 90px cursor repel
+          var d = Math.sqrt(d2), push = (1 - d / 90) * 5;
+          ax += dx / d * push; ay += dy / d * push;
+        }
+        vx[i] = (vx[i] + ax) * 0.78;
+        vy[i] = (vy[i] + ay) * 0.78;
+        px[i] += vx[i]; py[i] += vy[i];
+        var ci = e < 0.5 ? A.c[i] : B.c[i];
+        if (ci === GR) ci = GBASE + Math.min(GRAD.length - 1, Math.max(0, (px[i] / W * GRAD.length) | 0));
+        buckets[ci].push(i);
+      }
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+
+      // Walking routes for each chart, drawn through the rooms' live positions.
+      var wr = weight(2);
+      if (wr > 0.05) {
+        ctx.lineWidth = 1.4;
+        ctx.globalAlpha = 0.6 * wr;
+        charts.forEach(function (ch, ci) {
+          ctx.strokeStyle = COL[7 + (ci % NCH)];
+          ctx.beginPath();
+          ch.rooms.forEach(function (ri, n) { if (n) ctx.lineTo(px[ri], py[ri]); else ctx.moveTo(px[ri], py[ri]); });
+          ctx.stroke();
+        });
+        ctx.globalAlpha = 1;
+      }
+
+      for (var c = 0; c < buckets.length; c++) {
+        var list = buckets[c];
+        if (!list.length) continue;
+        ctx.fillStyle = COL[c];
+        for (var j = 0; j < list.length; j++) {
+          var q = list[j], e2 = easeOut(clamp(t * 1.5 - lag[q] * 0.5));
+          var sz = A.s[q] + (B.s[q] - A.s[q]) * e2;
+          ctx.fillRect(px[q] - sz / 2, py[q] - sz / 2, sz, sz);
+        }
+      }
+
+      // Overlay text: intro UI fades out as the story starts, then one caption per stage.
+      var uiO = 1 - clamp((p - 0.015) / 0.06);
+      ui.style.opacity = uiO.toFixed(3);
+      ui.style.transform = "translateY(" + (-(1 - uiO) * 24).toFixed(1) + "px)";
+      ui.style.visibility = uiO < 0.02 ? "hidden" : "";
+      if (cue) cue.style.opacity = (1 - clamp(p / 0.03)).toFixed(3);
+      for (var ci2 = 0; ci2 < caps.length; ci2++) {
+        var st = ci2 + 1, seg = (POS[st + 1] || 1) - POS[st];
+        var o = clamp((1 - Math.abs(p - (POS[st] + seg * 0.18)) / (seg * 0.32)) * 2.2);
+        caps[ci2].style.opacity = o.toFixed(3);
+        caps[ci2].style.transform = "translate(-50%," + ((1 - o) * 12).toFixed(1) + "px)";
+        caps[ci2].style.visibility = o < 0.02 ? "hidden" : "";
+      }
+      labels.forEach(function (l) {
+        var w = 0;
+        l.stages.forEach(function (st2) { w = Math.max(w, weight(st2)); });
+        l.el.style.opacity = clamp(w * 2 - 1).toFixed(3);
+      });
+
+      requestAnimationFrame(frame);
+    };
+
+    var start = function () {
+      build();
+      new IntersectionObserver(function (entries) {
+        var on = entries[0].isIntersecting;
+        if (on && !running) { running = true; requestAnimationFrame(frame); }
+        else if (!on) running = false;
+      }).observe(hx);
+    };
+
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      var r = pin.getBoundingClientRect();
+      mx = e.clientX - r.left; my = e.clientY - r.top;
+    }, { passive: true });
+    document.addEventListener("pointerleave", function () { mx = my = -1e4; });
+
+    var lastW = window.innerWidth, lastH = window.innerHeight, rt;
+    window.addEventListener("resize", function () {
+      // Mobile toolbars nudge the height while scrolling; only rebuild on real changes.
+      if (window.innerWidth === lastW && Math.abs(window.innerHeight - lastH) < 120) return;
+      lastW = window.innerWidth; lastH = window.innerHeight;
+      clearTimeout(rt);
+      rt = setTimeout(function () { if (built) build(); }, 150);
+    });
+
+    var fontReady = document.fonts && document.fonts.load
+      ? document.fonts.load("700 100px Archivo").catch(function () {})
+      : Promise.resolve();
+    Promise.race([fontReady, new Promise(function (r) { setTimeout(r, 1500); })]).then(start);
+  })();
+
+  // ---------------------------------------------------------------------
+  // Flow diagrams inside the case studies, in the same pixel style as the
+  // hero's dbt lineage: boxes assemble from scattered dots when the figure
+  // scrolls into view, then dots keep flowing along the edges.
+  // Each box is a real part of the app; labels are kept plain on purpose.
+  // ---------------------------------------------------------------------
+  var FLOWS = {
+    sched: {
+      heads: ["In", "Algorithms", "Routing", "Assignment", "Out to the floor"],
+      cols: [
+        [["rooms", "Morning room list"], ["staff", "Staff sheet"], ["plans", "Floor plans"]],
+        [["fc", "Full Clean packer"], ["ds", "Daily Service packer"]],
+        [["route", "Shortest walking route"]],
+        [["assign", "Assign staff"]],
+        [["phone", "Phone app, English / Spanish", 1], ["live", "Inspector live board", 1]]
+      ],
+      edges: [["rooms", "fc"], ["rooms", "ds"], ["plans", "fc"], ["plans", "ds"], ["plans", "route"],
+        ["fc", "route"], ["ds", "route"], ["route", "assign"], ["staff", "assign"],
+        ["assign", "phone"], ["assign", "live"]]
+    },
+    budget: {
+      heads: ["In", "Checks", "Storage", "Tracking", "Out to managers"],
+      cols: [
+        [["xl", "Old Excel workbook"], ["new", "New expense"]],
+        [["imp", "Clean & import"], ["dup", "Duplicate check"]],
+        [["db", "One database"]],
+        [["audit", "Audit trail"], ["bva", "Budget vs actual"]],
+        [["dash", "Live dashboard", 1], ["alert", "Over-budget alerts", 1], ["pdf", "Monthly PDF report", 1]]
+      ],
+      edges: [["xl", "imp"], ["new", "dup"], ["imp", "db"], ["dup", "db"], ["db", "audit"], ["db", "bva"],
+        ["bva", "dash"], ["bva", "alert"], ["bva", "pdf"]]
+    }
+  };
+  var FGRAD = ["#2f5bea", "#3a4fe6", "#4a44e0", "#5b3ddc", "#6d34d8", "#8230d2", "#9a2cc6", "#b327b4"];
+  var AMBER = "#f0a44c";
+
+  var makeFlow = function (fig, spec) {
+    var box = fig.querySelector(".flow-stage");
+    var cv = fig.querySelector("canvas");
+    var layer = fig.querySelector(".flow-labels");
+    var ctx = cv.getContext && cv.getContext("2d");
+    if (!ctx || !spec) return;
+    fig.classList.add("on");
+
+    var W, H, dpr, edges, dots = [], born = 0, started = false, running = false, lastW = 0;
+
+    var bez = function (e, t, out) {
+      var a = e[0], b = e[1], v = e[2], x0, y0, x3, y3, x1, y1, x2, y2;
+      if (v) { x0 = a.cx; y0 = a.cy + a.h / 2; x3 = b.cx; y3 = b.cy - b.h / 2; x1 = x0; x2 = x3; y1 = y2 = (y0 + y3) / 2; }
+      else { x0 = a.cx + a.w / 2; y0 = a.cy; x3 = b.cx - b.w / 2; y3 = b.cy; y1 = y0; y2 = y3; x1 = x2 = (x0 + x3) / 2; }
+      var m = 1 - t;
+      out[0] = m * m * m * x0 + 3 * m * m * t * x1 + 3 * m * t * t * x2 + t * t * t * x3;
+      out[1] = m * m * m * y0 + 3 * m * m * t * y1 + 3 * m * t * t * y2 + t * t * t * y3;
+    };
+
+    var build = function () {
+      W = box.clientWidth; H = box.clientHeight; lastW = W;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      var vertical = W < 640, n = spec.cols.length;
+      var maxPer = Math.max.apply(null, spec.cols.map(function (c) { return c.length; }));
+      var nw = vertical ? Math.min(124, (W - 16) / maxPer - 10) : Math.min(170, W / n - 26);
+      var nh = vertical ? 40 : 38, top = vertical ? 10 : 42, bottom = 10;
+      var nodes = {};
+      layer.innerHTML = "";
+      spec.cols.forEach(function (col, ci) {
+        col.forEach(function (nd, ni) {
+          var along = (ni + 0.5) / col.length, cx, cy;
+          if (vertical) { cx = 8 + along * (W - 16); cy = top + (ci + 0.5) / n * (H - top - bottom); }
+          else { cx = (ci + 0.5) / n * W; cy = top + along * (H - top - bottom); }
+          nodes[nd[0]] = { cx: cx, cy: cy, w: nw, h: nh, hi: !!nd[2] };
+          var el = document.createElement("span");
+          el.className = "flow-label" + (nd[2] ? " hi" : "");
+          el.textContent = nd[1];
+          el.style.left = cx.toFixed(1) + "px"; el.style.top = cy.toFixed(1) + "px";
+          el.style.width = (nw - 10).toFixed(0) + "px";
+          layer.appendChild(el);
+        });
+        if (!vertical && spec.heads) {
+          var hd = document.createElement("span");
+          hd.className = "flow-head";
+          hd.textContent = spec.heads[ci];
+          hd.style.left = ((ci + 0.5) / n * W).toFixed(1) + "px";
+          layer.appendChild(hd);
+        }
+      });
+      edges = spec.edges.map(function (e) { return [nodes[e[0]], nodes[e[1]], vertical]; });
+
+      // Dots: box outlines every ~5px, plus a stream on each edge.
+      dots = [];
+      Object.keys(nodes).forEach(function (id) {
+        var nd = nodes[id], per = 2 * (nd.w + nd.h), count = Math.round(per / 5);
+        for (var k = 0; k < count; k++) {
+          var t = k / count * per;
+          var x = t < nd.w ? t : t < nd.w + nd.h ? nd.w : t < 2 * nd.w + nd.h ? 2 * nd.w + nd.h - t : 0;
+          var y = t < nd.w ? 0 : t < nd.w + nd.h ? t - nd.w : t < 2 * nd.w + nd.h ? nd.h : per - t;
+          var tx = nd.cx - nd.w / 2 + x, ty = nd.cy - nd.h / 2 + y;
+          dots.push({ tx: tx, ty: ty, e: -1, s: 2.2,
+            col: nd.hi ? AMBER : FGRAD[Math.min(FGRAD.length - 1, Math.max(0, (tx / W * FGRAD.length) | 0))] });
+        }
+      });
+      var tmp = [0, 0];
+      edges.forEach(function (e, ei) {
+        bez(e, 0, tmp); var ax = tmp[0], ay = tmp[1]; bez(e, 1, tmp);
+        var len = Math.hypot(tmp[0] - ax, tmp[1] - ay), count = Math.max(5, Math.round(len / 20));
+        for (var k = 0; k < count; k++) dots.push({ e: ei, ph: k / count, s: 2.6, col: AMBER });
+      });
+      dots.forEach(function (d) {
+        d.lag = Math.random();
+        d.x = started ? (d.tx || W / 2) : Math.random() * W;
+        d.y = started ? (d.ty || H / 2) : Math.random() * H;
+        d.sx = d.x; d.sy = d.y;
+      });
+    };
+
+    var tmpP = [0, 0];
+    var draw = function (now) {
+      var tsec = now * 0.001;
+      var intro = reduce ? 1 : clamp((now - born) / 1500);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      // faint edge lines so the structure reads even between dots
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "rgba(140,150,230," + (0.18 * intro).toFixed(3) + ")";
+      edges.forEach(function (e) {
+        ctx.beginPath();
+        for (var s = 0; s <= 24; s++) { bez(e, s / 24, tmpP); if (s) ctx.lineTo(tmpP[0], tmpP[1]); else ctx.moveTo(tmpP[0], tmpP[1]); }
+        ctx.stroke();
+      });
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i], tx = d.tx, ty = d.ty;
+        if (d.e >= 0) { bez(edges[d.e], (d.ph + (reduce ? 0 : tsec * 0.22)) % 1, tmpP); tx = tmpP[0]; ty = tmpP[1]; }
+        var ib = 1 - Math.pow(1 - clamp(intro * 1.6 - d.lag * 0.6), 3);
+        var gx = d.sx + (tx - d.sx) * ib, gy = d.sy + (ty - d.sy) * ib;
+        if (reduce) { d.x = gx; d.y = gy; } else { d.x += (gx - d.x) * 0.2; d.y += (gy - d.y) * 0.2; }
+        ctx.fillStyle = d.col;
+        ctx.fillRect(d.x - d.s / 2, d.y - d.s / 2, d.s, d.s);
+      }
+      layer.style.opacity = clamp(intro * 2.5 - 1.4).toFixed(3);   // labels land after the boxes do
+    };
+    var frame = function (now) {
+      if (!running) return;
+      draw(now);
+      requestAnimationFrame(frame);
+    };
+
+    build();
+    new IntersectionObserver(function (entries) {
+      var on = entries[0].isIntersecting;
+      if (on && !started) { started = true; born = performance.now(); }
+      if (reduce) { if (on) draw(performance.now()); return; }
+      if (on && !running) { running = true; requestAnimationFrame(frame); }
+      else if (!on) running = false;
+    }, { threshold: 0.25 }).observe(fig);
+
+    var rt;
+    window.addEventListener("resize", function () {
+      if (box.clientWidth === lastW) return;
+      clearTimeout(rt);
+      rt = setTimeout(function () { build(); if (reduce) draw(performance.now()); }, 150);
+    });
+  };
+
+  document.querySelectorAll(".flow[data-flow]").forEach(function (fig) {
+    makeFlow(fig, FLOWS[fig.getAttribute("data-flow")]);
+  });
 })();
 </script>
