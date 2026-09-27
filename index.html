@@ -214,8 +214,8 @@
     background:#070c12;border:1px solid #17222c;}
   .flow.on{display:block;}
   .flow-stage{position:relative;height:300px;
-    background-image:linear-gradient(rgba(120,140,230,.05) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(120,140,230,.05) 1px,transparent 1px);
+    background-image:linear-gradient(rgba(90,200,150,.045) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(90,200,150,.045) 1px,transparent 1px);
     background-size:40px 40px;}
   .flow canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
   .flow-labels{position:absolute;inset:0;pointer-events:none;opacity:0;}
@@ -230,7 +230,7 @@
     text-transform:uppercase;color:#7c8aa6;
   }
   .flow figcaption{
-    padding:11px 16px;border-top:1px solid #17222c;font-size:13.5px;line-height:1.5;color:#aab6c8;
+    padding:11px 16px;border-bottom:1px solid #17222c;font-size:13.5px;line-height:1.5;color:#aab6c8;
   }
   .flow figcaption b{
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:10.5px;
@@ -358,25 +358,25 @@
      Without either, it is a static dark hero with the name as real text. */
   .hx{
     --hx-bg:#060b10;--hx-ink:#e9f1f5;--hx-soft:#a9bcc8;--hx-muted:#6f8594;
-    --hx-teal:#5cc8e2;--hx-amber:#f0a44c;--hx-line:rgba(255,255,255,.1);
+    --hx-accent:#34d399;--hx-amber:#f0a44c;--hx-line:rgba(255,255,255,.1);
     position:relative;background:var(--hx-bg);color:var(--hx-ink);
     margin-top:-55px; /* slide under the sticky nav */
   }
-  .anim .hx{height:440vh;}
+  .anim .hx{height:600vh;}
   .hx-pin{position:relative;min-height:100svh;overflow:hidden;}
   .anim .hx-pin{position:sticky;top:0;height:100svh;min-height:0;}
   .hx-pin::before{
     content:"";position:absolute;inset:0;pointer-events:none;
     background-image:
-      linear-gradient(rgba(92,200,226,.055) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(92,200,226,.055) 1px,transparent 1px);
+      linear-gradient(rgba(52,211,153,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(52,211,153,.055) 1px,transparent 1px);
     background-size:56px 56px;
     -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 30%,transparent 80%);
             mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 30%,transparent 80%);
   }
   .hx-pin::after{ /* soft glow behind the name */
     content:"";position:absolute;left:50%;top:44%;width:80vw;height:60vh;transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side,rgba(129,140,248,.14),transparent);pointer-events:none;
+    background:radial-gradient(closest-side,rgba(16,185,129,.12),transparent);pointer-events:none;
   }
   .hx-cv{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:1;}
   .anim .hx-cv{display:block;}
@@ -388,11 +388,11 @@
   .hx-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
   .hx .portrait{
     width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;
-    border:1px solid rgba(92,200,226,.5);box-shadow:0 0 0 4px rgba(92,200,226,.08);
+    border:1px solid rgba(52,211,153,.5);box-shadow:0 0 0 4px rgba(52,211,153,.08);
   }
   .hx .hero-meta{color:var(--hx-soft);margin:0 0 7px;}
   .hx .status-line{margin:0;}
-  .hx .status-pill{background:rgba(92,200,226,.08);color:var(--hx-teal);border-color:rgba(92,200,226,.45);}
+  .hx .status-pill{background:rgba(52,211,153,.08);color:var(--hx-accent);border-color:rgba(52,211,153,.45);}
 
   .hx-stage{flex:1;display:flex;align-items:center;min-height:190px;padding-block:18px;}
   .hx-name{
@@ -408,10 +408,10 @@
   .hx .thesis strong{color:var(--hx-ink);}
   .hx .cta-row{margin:0;}
   .hx .btn{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.18);color:var(--hx-ink);}
-  .hx .btn:hover{border-color:var(--hx-teal);color:var(--hx-teal);}
-  .hx .btn-primary{background:var(--hx-teal);border-color:var(--hx-teal);color:#04141b;}
+  .hx .btn:hover{border-color:var(--hx-accent);color:var(--hx-accent);}
+  .hx .btn-primary{background:var(--hx-accent);border-color:var(--hx-accent);color:#04141b;}
   .hx .btn-primary:hover{color:#04141b;opacity:.9;}
-  .hx a:focus-visible{outline-color:var(--hx-teal);}
+  .hx a:focus-visible{outline-color:var(--hx-accent);}
   @media (max-width:760px){ .hx-bottom{grid-template-columns:1fr;} }
 
   .hx-cue{
@@ -423,7 +423,7 @@
   .anim .hx-cue{display:block;}
   .hx-cue::after{
     content:"";display:inline-block;width:1px;height:34px;margin-top:12px;
-    background:linear-gradient(var(--hx-teal),transparent);transform-origin:top;
+    background:linear-gradient(var(--hx-accent),transparent);transform-origin:top;
     animation:cue 1.8s ease-in-out infinite;
   }
   @keyframes cue{0%{transform:scaleY(0);}50%{transform:scaleY(1);}100%{transform:scaleY(1);opacity:0;}}
@@ -432,23 +432,41 @@
 
   /* captions for each scroll stage */
   .hx-caps{display:none;}
-  .anim .hx-caps{display:block;position:absolute;left:0;right:0;bottom:7vh;z-index:3;pointer-events:none;}
-  .cap{
-    position:absolute;left:50%;bottom:0;width:min(680px,calc(100vw - 32px));
+  .anim .hx-caps{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;}
+  .cap{ /* headline sits at the top; the visual plays out underneath it */
+    position:absolute;left:50%;top:78px;width:min(720px,calc(100vw - 32px));
     transform:translate(-50%,0);text-align:center;opacity:0;
   }
+  @media (max-width:700px){ .cap{top:68px;} }
   .cap b{
     display:block;margin-bottom:8px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;
     font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--hx-amber);
   }
-  .cap span{font-size:clamp(15px,1.8vw,19px);line-height:1.5;color:var(--hx-soft);}
+  .cap span{font-size:clamp(16px,2vw,21px);line-height:1.45;color:var(--hx-soft);}
   .cap span em{font-style:normal;color:var(--hx-ink);}
   .cap small{
     display:block;margin-top:10px;font-family:"IBM Plex Mono",ui-monospace,monospace;
     font-size:11px;letter-spacing:.04em;color:var(--hx-muted);
   }
-  .cap small a{color:var(--hx-teal);pointer-events:auto;text-decoration:none;border-bottom:1px solid rgba(92,200,226,.35);}
-  .cap small a:hover{border-bottom-color:var(--hx-teal);}
+  .cap small a{color:var(--hx-accent);pointer-events:auto;text-decoration:none;border-bottom:1px solid rgba(52,211,153,.35);}
+  .cap small a:hover{border-bottom-color:var(--hx-accent);}
+
+  /* the "recent projects" card between the name and the story */
+  .cap.cap-intro{top:50%;}
+  .cap-card{
+    transform:translateY(-50%);text-align:left;margin:0 auto;width:min(540px,100%);
+    padding:24px 26px 20px;border:1px solid rgba(52,211,153,.22);border-radius:8px;
+    background:rgba(6,11,16,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  }
+  .cap-card strong{
+    display:block;margin-bottom:16px;font-family:Archivo,sans-serif;font-weight:700;
+    font-size:clamp(22px,3vw,30px);letter-spacing:-.02em;line-height:1.15;color:var(--hx-ink);
+  }
+  .pj{display:grid;grid-template-columns:34px 1fr;gap:1px 8px;padding:10px 0;border-top:1px solid var(--hx-line);}
+  .pj i{grid-row:span 2;padding-top:3px;font-style:normal;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--hx-accent);}
+  .pj p{margin:0;font-size:16px;font-weight:600;color:var(--hx-ink);}
+  .pj em{font-style:normal;font-size:13px;color:var(--hx-muted);}
+  .cap-card small{margin-top:12px;}
 
   /* labels the engine pins onto the canvas: buildings, levels, model names */
   .hx-labels{display:none;}
@@ -461,10 +479,11 @@
   .hx-label-r{transform:translate(-100%,-50%);}
   .hx-label-hi{color:var(--hx-amber);}
   .hx-label-node{font-size:11.5px;letter-spacing:.02em;color:var(--hx-ink);}
+  .hx-label-alert{padding:3px 7px;border:1px solid rgba(240,164,76,.55);border-radius:3px;background:rgba(6,11,16,.8);}
   @media (max-width:700px){
     .hx-label{font-size:9px;letter-spacing:.06em;}
     .hx-label-node{font-size:8.5px;letter-spacing:0;}
-    .hx-label-hi:not(.hx-label-node){white-space:normal;width:calc(100vw - 32px);text-align:center;line-height:1.5;}
+    .hx-label-hi:not(.hx-label-node):not(.hx-label-alert){white-space:normal;width:calc(100vw - 32px);text-align:center;line-height:1.5;}
   }
 
   /* nav reads light-on-dark while it sits over the hero */
@@ -472,7 +491,7 @@
   .nav.on-dark{background:rgba(6,11,16,.55);border-bottom-color:rgba(255,255,255,.08);}
   .nav.on-dark .nav-name{color:#e9f1f5;}
   .nav.on-dark .nav-links a{color:#8aa0ae;}
-  .nav.on-dark .nav-links a:hover{color:#5cc8e2;}
+  .nav.on-dark .nav-links a:hover{color:#34d399;}
 
   /* ---------- staggered children ---------- */
   .anim .pillars .pillar,
@@ -494,7 +513,7 @@
   .anim .pipe-node.is-end:not(.lit){border-color:var(--rule-strong);color:var(--ink-soft);background:var(--surface);}
   .anim .pipe-node.lit{border-color:var(--accent);color:var(--accent);}
   .anim .pipe-node.is-end.lit{box-shadow:0 0 0 3px var(--accent-soft);}
-  .anim .pipe.flow .pipe-node.is-end{animation:glow 2.8s ease-in-out infinite;}
+  .anim .pipe.flowing .pipe-node.is-end{animation:glow 2.8s ease-in-out infinite;}
   .anim .pipe-arrow{
     position:relative;width:28px;height:10px;font-size:0;color:transparent;
     background:linear-gradient(var(--rule-strong),var(--rule-strong)) 0 50%/100% 2px no-repeat;
@@ -507,7 +526,7 @@
     content:"";position:absolute;left:-3px;top:2px;width:6px;height:6px;border-radius:50%;
     background:var(--figure);opacity:0;z-index:1;
   }
-  .anim .pipe.flow .pipe-arrow::before{animation:packet 1.6s linear infinite;animation-delay:calc(var(--i,0) * .4s);}
+  .anim .pipe.flowing .pipe-arrow::before{animation:packet 1.6s linear infinite;animation-delay:calc(var(--i,0) * .4s);}
   @keyframes packet{
     0%{transform:translateX(0);opacity:0;}
     15%,85%{opacity:1;}
@@ -586,10 +605,20 @@
     <div class="hx-labels" aria-hidden="true"></div>
 
     <div class="hx-caps">
-      <div class="cap"><b>01 · The problem</b><span>245 rooms across three buildings, <em>assigned by hand</em> every morning.</span><small>Real floor plans · illustrative day · <a href="#work">how it works ↓</a></small></div>
-      <div class="cap"><b>02 · The algorithm</b><span>Now an algorithm builds the charts: <em>fair workloads, less walking</em>, no rule broken.</span><small><a href="https://github.com/hari-94/BGV-Scheduling" target="_blank" rel="noopener">BGV-Scheduling</a> · <a href="#work">details ↓</a></small></div>
-      <div class="cap"><b>03 · The warehouse</b><span>Raw data modelled into <em>tested layers</em>, so the dashboard number can be trusted.</span><small><a href="https://github.com/hari-94/dbt_TS" target="_blank" rel="noopener">dbt_TS</a> · <a href="#work">details ↓</a></small></div>
-      <div class="cap"><b>04 · The result</b><span>What the tools <em>give back every year</em>.</span><small><a href="#work">See the case studies ↓</a></small></div>
+      <div class="cap cap-intro"><div class="cap-card">
+        <b>Recent projects</b>
+        <strong>A few things I've built lately.</strong>
+        <div class="pj"><i>01</i><p>Housekeeping scheduling engine</p><em>Grand Colorado on Peak 8 · Python, optimisation</em></div>
+        <div class="pj"><i>02</i><p>Budget tracking system</p><em>Grand Colorado on Peak 8 · Streamlit, Supabase</em></div>
+        <div class="pj"><i>03</i><p>Analytics warehouse</p><em>dbt · 15 models · 51 tests</em></div>
+        <div class="pj"><i>04</i><p>What they're worth</p><em>Hours and dollars saved each year</em></div>
+        <small>Keep scrolling to watch them run ↓</small>
+      </div></div>
+      <div class="cap"><b>01 · Scheduling engine · The problem</b><span>245 rooms across three buildings, <em>assigned by hand</em> every morning.</span><small>Real floor plans · illustrative day · <a href="#work">how it works ↓</a></small></div>
+      <div class="cap"><b>01 · Scheduling engine · The algorithm</b><span>Now an algorithm builds the charts: <em>fair workloads, less walking</em>, no rule broken.</span><small><a href="https://github.com/hari-94/BGV-Scheduling" target="_blank" rel="noopener">BGV-Scheduling</a> · <a href="#work">details ↓</a></small></div>
+      <div class="cap"><b>02 · Budget tracking</b><span>Every expense recorded once and <em>compared with the budget as it happens</em>, with a warning before it runs over.</span><small><a href="https://github.com/hari-94/gc8-budget-tracker" target="_blank" rel="noopener">gc8-budget-tracker</a> · illustrative months · <a href="#work">details ↓</a></small></div>
+      <div class="cap"><b>03 · Analytics warehouse</b><span>Raw data modelled into <em>tested layers</em>, so the dashboard number can be trusted.</span><small><a href="https://github.com/hari-94/dbt_TS" target="_blank" rel="noopener">dbt_TS</a> · <a href="#work">details ↓</a></small></div>
+      <div class="cap"><b>04 · The payoff</b><span>What the tools <em>give back every year</em>.</span><small><a href="#work">See the case studies ↓</a></small></div>
     </div>
   </div>
 </section>
@@ -701,8 +730,8 @@
           </ul>
         </div>
         <figure class="flow" data-flow="sched">
-          <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
           <figcaption><b>How it works</b> The morning room list, the staff sheet and the floor plans go in. A plan in walking order comes out on every housekeeper's phone.</figcaption>
+          <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
         </figure>
       </article>
 
@@ -735,8 +764,8 @@
           </ul>
         </div>
         <figure class="flow" data-flow="budget">
-          <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
           <figcaption><b>How it works</b> Every expense, old or new, is checked and stored once. That one copy feeds the dashboard, the alerts and the monthly report.</figcaption>
+          <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
         </figure>
       </article>
 
@@ -766,6 +795,10 @@
             <li><strong>Better planning.</strong> Staffing decisions are now based on facts, not memory.</li>
           </ul>
         </div>
+        <figure class="flow" data-flow="etl">
+          <figcaption><b>How it works</b> Years of hand-kept sheets are read, cleaned and loaded into one table, which can answer questions the workbook never could.</figcaption>
+          <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
+        </figure>
       </article>
 
       <article class="case rv">
@@ -1101,7 +1134,7 @@
       Array.prototype.forEach.call(pipeNodes, function (n, i) {
         n.classList.toggle("lit", i === 0 ? p > 0 : seg - (i - 1) >= 1);
       });
-      pipe.classList.toggle("flow", p >= 1);
+      pipe.classList.toggle("flowing", p >= 1);
     }
 
     if (roles) {
@@ -1129,10 +1162,12 @@
   // each shape; scroll progress through the .hx track picks which two shapes
   // it sits between, and a spring pulls each particle toward the blend.
   //   0 name
-  //   1 the property: every guest room from BGV-Scheduling/property_map.py
-  //   2 the same rooms packed into charts under fcpack.py's hard rules
-  //   3 the dbt_TS lineage: its 15 models and their real ref() edges
-  //   4 the annual result
+  //   1 a calm field behind the "recent projects" card
+  //   2 the property: every guest room from BGV-Scheduling/property_map.py
+  //   3 the same rooms packed into charts under fcpack.py's hard rules
+  //   4 budget vs actual by month, as the budget tracker shows it
+  //   5 the dbt_TS lineage: its 15 models and their real ref() edges
+  //   6 the annual result
   // ---------------------------------------------------------------------
   if (hx && !reduce) (function () {
     var pin = hx.querySelector(".hx-pin");
@@ -1145,15 +1180,15 @@
     var labelLayer = hx.querySelector(".hx-labels");
     if (!ctx) return;
 
-    var POS = [0, 0.19, 0.41, 0.63, 0.85];   // scroll progress where each shape is fully formed
+    var POS = [0, 0.12, 0.26, 0.4, 0.55, 0.7, 0.87];   // scroll progress where each shape is fully formed
     // 0-2 base tones, 3 dim room, 4 structure, 5 dust, 6 bridge, 7+ one per chart
-    var COL = ["#5cc8e2", "#c9d2ff", "#f0a44c", "#34505e", "#1d3a48", "#12232c", "#3f8ea3",
+    var COL = ["#34d399", "#c9f7dc", "#f0a44c", "#2c4a3f", "#1a3a2e", "#0f231b", "#2f9e76",
       "#5cc8e2", "#f0a44c", "#b18cff", "#6fdc8c", "#ff7aa8", "#ffd84c",
       "#4c8dff", "#ff8c5c", "#8ef0e0", "#e0a0ff", "#a8e05c", "#ff5c7a"];
     var NCH = COL.length - 7;
     // Text and model boxes take their colour from where they sit: cyan at the
     // left edge through blue and violet to pink at the right. GR marks them.
-    var GRAD = ["#2f5bea", "#3a4fe6", "#4a44e0", "#5b3ddc", "#6d34d8", "#8230d2", "#9a2cc6", "#b327b4"];
+    var GRAD = ["#0b6b4f", "#0e7c57", "#118c5e", "#159c63", "#1aab67", "#24b86d", "#35c477", "#4fcf85"];
     var GR = 250, GBASE = COL.length;
     COL = COL.concat(GRAD);
     // Enough particles to keep letters solid on big screens, capped for frame rate.
@@ -1362,6 +1397,60 @@
       return sh;
     };
 
+    // ---- a calm field behind the "recent projects" card ----------------
+    var fieldShape = function () {
+      var sh = blank(), bx = new Float32Array(N), by = new Float32Array(N);
+      for (var k = 0; k < N; k++) {
+        bx[k] = sh.x[k] = Math.random() * W;
+        by[k] = sh.y[k] = Math.random() * H;
+        if (Math.random() < 0.35) { sh.c[k] = GR; sh.s[k] = base * 0.9; }
+        else { sh.c[k] = 5; sh.s[k] = base * 0.8; }
+      }
+      sh.dyn = function (k, tsec, out) {       // a slow drift, so the field breathes
+        out[0] = bx[k] + Math.sin(tsec * 0.35 + k * 0.7) * 10;
+        out[1] = by[k] + Math.cos(tsec * 0.3 + k * 1.3) * 10;
+        return true;
+      };
+      return sh;
+    };
+
+    // ---- budget vs actual ------------------------------------------------
+    // Illustrative months, not the department's figures: an outline for each
+    // month's budget, a fill for what was spent, amber where spend ran over.
+    var MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    var BUD = [52, 58, 55, 44, 30, 28, 34, 36, 32, 30, 40, 54];
+    var ACT = [49, 66, 51, 41, 27, 26, 31, 33, 28, 27, 36, 49];   // February runs over
+
+    var budgetShape = function (box) {
+      var sh = blank(), n = BUD.length, gap = box.w / n, bw = gap * 0.6, bottom = box.y + box.h;
+      var hOf = function (v) { return v / 66 * box.h; };
+      var left = function (m) { return box.x + m * gap + (gap - bw) / 2; };
+      var pick = function (weights) {                  // month chosen in proportion to its weight
+        var total = weights.reduce(function (a, b) { return a + b; }, 0), r = Math.random() * total, m = 0;
+        while (r > weights[m] && m < weights.length - 1) { r -= weights[m]; m++; }
+        return m;
+      };
+      var perims = BUD.map(function (b) { return 2 * hOf(b) + bw; });
+      var outN = Math.round(N * 0.3), fillN = Math.round(N * 0.55);
+      for (var k = 0; k < N; k++) {
+        if (k < outN) {                                  // budget outline: sides and top
+          var m = pick(perims), h = hOf(BUD[m]), t = Math.random() * perims[m];
+          if (t < h) { sh.x[k] = left(m); sh.y[k] = bottom - t; }
+          else if (t < h + bw) { sh.x[k] = left(m) + (t - h); sh.y[k] = bottom - h; }
+          else { sh.x[k] = left(m) + bw; sh.y[k] = bottom - (t - h - bw); }
+          sh.c[k] = 1; sh.s[k] = base * 0.85;
+        } else if (k < outN + fillN) {                   // actual spend
+          var m2 = pick(ACT), y = bottom - Math.random() * hOf(ACT[m2]);
+          sh.x[k] = left(m2) + 2 + Math.random() * (bw - 4);
+          sh.y[k] = y;
+          sh.c[k] = y < bottom - hOf(BUD[m2]) ? 2 : GR;
+        } else dust(sh, k);
+      }
+      sh.over = { x: left(1) + bw / 2, y: bottom - hOf(ACT[1]) };
+      sh.left = left; sh.bw = bw; sh.bottom = bottom;
+      return sh;
+    };
+
     // ---- the dbt lineage -----------------------------------------------
     var MODELS = [
       ["raw_projects", 0], ["raw_resources", 0], ["raw_allocations", 0], ["raw_tickets", 0],
@@ -1452,18 +1541,23 @@
       var nameBox = { x: s.left - rect.left, y: s.top - rect.top + 10, w: s.width, h: s.height - 20 };
       var nameLines = nameBox.w > 720 ? ["HARI PRASATH", "ULAGANATHAN"] : ["HARI", "PRASATH", "ULAGANATHAN"];
       var side = mobile ? 16 : Math.max(24, (W - 1180) / 2);
-      var propBox = { x: side + (mobile ? 0 : 40), y: H * (mobile ? 0.2 : 0.17), w: W - side * 2 - (mobile ? 0 : 40), h: H * (mobile ? 0.36 : 0.46) };
-      var dagBox = mobile ? { x: 12, y: H * 0.13, w: W - 24, h: H * 0.52 }
-                          : { x: side, y: H * 0.17, w: W - side * 2, h: H * 0.46 };
-      var numBox = { x: W * 0.08, y: H * 0.14, w: W * 0.84, h: H * 0.54 };
+      var propBox = { x: side + (mobile ? 0 : 40), y: H * (mobile ? 0.44 : 0.33), w: W - side * 2 - (mobile ? 0 : 40), h: H * (mobile ? 0.34 : 0.5) };
+      var dagBox = mobile ? { x: 12, y: H * 0.38, w: W - 24, h: H * 0.56 }
+                          : { x: side, y: H * 0.34, w: W - side * 2, h: H * 0.52 };
+      var budBox = mobile ? { x: 16, y: H * 0.44, w: W - 32, h: H * 0.34 }
+                          : { x: side + 40, y: H * 0.38, w: W - side * 2 - 80, h: H * 0.44 };
+      var numBox = { x: W * 0.08, y: H * (mobile ? 0.38 : 0.3), w: W * 0.84, h: H * (mobile ? 0.48 : 0.6) };
 
       charts = packCharts();
       var prop = propertyShape(propBox, false);
       var dag = dagShape(dagBox);
+      var bud = budgetShape(budBox);
       shapes = [
         textShape(nameLines, nameBox),
+        fieldShape(),
         prop,
         propertyShape(propBox, true),
+        bud,
         dag,
         textShape(["598 HRS", "$33,600"], numBox)
       ];
@@ -1473,21 +1567,27 @@
       labels = [];
       var g = prop.geo;
       ORDER.forEach(function (b) {
-        label("BLDG " + b, g.left[b] + g.widths[b] * g.u / 2, propBox.y + propBox.h + 16, [1, 2], "hx-label-c");
+        label("BLDG " + b, g.left[b] + g.widths[b] * g.u / 2, propBox.y + propBox.h + 16, [2, 3], "hx-label-c");
       });
       if (!mobile) LEVELS.forEach(function (lv, i) {
-        label(lv === "Plaza" || lv === "Terrace" ? lv.toUpperCase() : "L" + lv, g.left[3] - 14, g.ry(i) + g.rowGap * 0.5, [1, 2], "hx-label-r");
+        label(lv === "Plaza" || lv === "Terrace" ? lv.toUpperCase() : "L" + lv, g.left[3] - 14, g.ry(i) + g.rowGap * 0.5, [2, 3], "hx-label-r");
       });
       var fcCount = rooms.filter(function (rm) { return rm.fc; }).length;
-      label(fcCount + " rooms need a Full Clean today", W / 2, propBox.y - 30, [1], "hx-label-c hx-label-hi");
+      label(fcCount + " rooms need a Full Clean today", W / 2, propBox.y - 30, [2], "hx-label-c hx-label-hi");
       label(fcCount + " rooms → " + charts.length + " charts  ·  0 apartments split  ·  0 charts across bldgs 2 + 3",
-        W / 2, propBox.y - 30, [2], "hx-label-c hx-label-hi");
+        W / 2, propBox.y - 30, [3], "hx-label-c hx-label-hi");
+      MONTHS.forEach(function (mo, m) {
+        label(mobile ? mo.charAt(0) : mo, bud.left(m) + bud.bw / 2, bud.bottom + 16, [4], "hx-label-c");
+      });
+      label("Outline = budget  ·  filled = actual  ·  illustrative months", W / 2, budBox.y - 56, [4], "hx-label-c hx-label-hi");
+      if (mobile) label("Over budget → alert", bud.left(1) - 4, bud.over.y - 18, [4], "hx-label-hi hx-label-alert");
+      else label("Over budget → alert sent", bud.over.x, bud.over.y - 18, [4], "hx-label-c hx-label-hi hx-label-alert");
       Object.keys(dag.nodes).forEach(function (name) {
         var nd = dag.nodes[name];
-        label(name, nd.cx, nd.cy, [3], "hx-label-c hx-label-node" + (nd.layer === 4 ? " hx-label-hi" : ""));
+        label(name, nd.cx, nd.cy, [5], "hx-label-c hx-label-node" + (nd.layer === 4 ? " hx-label-hi" : ""));
       });
       if (!mobile) ["raw", "staging", "intermediate", "marts", "report"].forEach(function (t, ci) {
-        label(t.toUpperCase(), dagBox.x + (ci + 0.5) / 5 * dagBox.w, dagBox.y - 30, [3], "hx-label-c");
+        label(t.toUpperCase(), dagBox.x + (ci + 0.5) / 5 * dagBox.w, dagBox.y - 30, [5], "hx-label-c");
       });
 
       if (!built) { // first build: start as raw noise across the whole panel
@@ -1552,7 +1652,7 @@
       ctx.clearRect(0, 0, W, H);
 
       // Walking routes for each chart, drawn through the rooms' live positions.
-      var wr = weight(2);
+      var wr = weight(3);
       if (wr > 0.05) {
         ctx.lineWidth = 1.4;
         ctx.globalAlpha = 0.6 * wr;
@@ -1584,9 +1684,11 @@
       if (cue) cue.style.opacity = (1 - clamp(p / 0.03)).toFixed(3);
       for (var ci2 = 0; ci2 < caps.length; ci2++) {
         var st = ci2 + 1, seg = (POS[st + 1] || 1) - POS[st];
-        var o = clamp((1 - Math.abs(p - (POS[st] + seg * 0.18)) / (seg * 0.32)) * 2.2);
+        var mid = POS[st] + seg * 0.18;
+        var o = clamp((1 - Math.abs(p - mid) / (seg * 0.32)) * 2.2);
+        if (st === POS.length - 1 && p > mid) o = 1;   // the last figure stays captioned as it leaves
         caps[ci2].style.opacity = o.toFixed(3);
-        caps[ci2].style.transform = "translate(-50%," + ((1 - o) * 12).toFixed(1) + "px)";
+        caps[ci2].style.transform = "translate(-50%," + (-(1 - o) * 12).toFixed(1) + "px)";   // drops in from above
         caps[ci2].style.visibility = o < 0.02 ? "hidden" : "";
       }
       labels.forEach(function (l) {
@@ -1660,9 +1762,20 @@
       ],
       edges: [["xl", "imp"], ["new", "dup"], ["imp", "db"], ["dup", "db"], ["db", "audit"], ["db", "bva"],
         ["bva", "dash"], ["bva", "alert"], ["bva", "pdf"]]
+    },
+    etl: {
+      heads: ["In", "Extract", "Transform", "Load", "Analysis"],
+      cols: [
+        [["wb", "85-tab Excel workbook"]],
+        [["read", "Read every tab"]],
+        [["clean", "Clean & standardise"]],
+        [["tbl", "30,401 shift records"]],
+        [["trend", "Trends & clusters", 1], ["bal", "Workload balance", 1], ["travel", "Travel comparison", 1]]
+      ],
+      edges: [["wb", "read"], ["read", "clean"], ["clean", "tbl"], ["tbl", "trend"], ["tbl", "bal"], ["tbl", "travel"]]
     }
   };
-  var FGRAD = ["#2f5bea", "#3a4fe6", "#4a44e0", "#5b3ddc", "#6d34d8", "#8230d2", "#9a2cc6", "#b327b4"];
+  var FGRAD = ["#0b6b4f", "#0e7c57", "#118c5e", "#159c63", "#1aab67", "#24b86d", "#35c477", "#4fcf85"];
   var AMBER = "#f0a44c";
 
   var makeFlow = function (fig, spec) {
@@ -1752,7 +1865,7 @@
       ctx.clearRect(0, 0, W, H);
       // faint edge lines so the structure reads even between dots
       ctx.lineWidth = 1;
-      ctx.strokeStyle = "rgba(140,150,230," + (0.18 * intro).toFixed(3) + ")";
+      ctx.strokeStyle = "rgba(110,200,160," + (0.18 * intro).toFixed(3) + ")";
       edges.forEach(function (e) {
         ctx.beginPath();
         for (var s = 0; s <= 24; s++) { bez(e, s / 24, tmpP); if (s) ctx.lineTo(tmpP[0], tmpP[1]); else ctx.moveTo(tmpP[0], tmpP[1]); }
