@@ -1,3 +1,9 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Hari Prasath Ulaganathan: data analyst who builds scheduling, budgeting and analytics tools, from raw data to the decision.">
+<meta name="theme-color" content="#060b10">
 <title>Hari Ulaganathan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,7 +92,24 @@
     text-transform:uppercase;color:var(--muted);text-decoration:none;
   }
   .nav-links a:hover{color:var(--accent);}
-  @media (max-width:720px){ .nav-links{display:none;} }
+  /* phones: the links fold into a Menu button that drops a panel under the bar */
+  .nav-toggle{
+    display:none;align-items:center;min-height:36px;padding:0 14px;border-radius:3px;cursor:pointer;
+    font:500 12px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;
+    border:1px solid var(--rule-strong);background:transparent;color:var(--ink);
+  }
+  @media (max-width:720px){
+    .nav-toggle{display:inline-flex;}
+    .nav-links{
+      display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+      padding:4px 20px 10px;background:var(--ground);border-bottom:1px solid var(--rule);
+      box-shadow:0 14px 28px rgba(0,0,0,.14);
+    }
+    .nav.open .nav-links{display:flex;}
+    .nav-links a{padding:14px 0;font-size:13px;border-top:1px solid var(--rule);}
+    .nav-links a:first-child{border-top:0;}
+    .nav-links a::after{display:none;}
+  }
 
   /* ---------- shared section furniture ---------- */
   .sec{border-top:1px solid var(--rule);padding-block:56px;}
@@ -159,6 +182,13 @@
   .pipe-arrow{color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:12px;}
   .pipe-cap{
     width:100%;margin-top:4px;font-size:12.5px;color:var(--muted);
+  }
+  /* phones: the pipeline runs top to bottom, arrows turned downward */
+  @media (max-width:560px){
+    .pipe{flex-direction:column;align-items:stretch;gap:0;}
+    .pipe-node{text-align:center;}
+    .pipe-arrow{align-self:center;transform:rotate(90deg);margin-block:9px;}
+    .pipe-cap{margin-top:14px;}
   }
 
   /* ---------- case studies ---------- */
@@ -391,6 +421,16 @@
     border:1px solid rgba(52,211,153,.5);box-shadow:0 0 0 4px rgba(52,211,153,.08);
   }
   .hx .hero-meta{color:var(--hx-soft);margin:0 0 7px;}
+  .hero-meta span+span::before{content:"·";margin:0 .8em;}
+  @media (max-width:640px){
+    .hx-top{flex-wrap:nowrap;align-items:flex-start;gap:14px;}
+    .hx-top>div{min-width:0;}
+    .hx .hero-meta{display:flex;flex-direction:column;gap:3px;letter-spacing:.08em;}
+    .hx .hero-meta span+span::before{content:none;}
+    .hx .status-pill{letter-spacing:.04em;}
+    .sec{padding-block:40px;}
+    .contact{padding-block:40px 24px;}
+  }
   .hx .status-line{margin:0;}
   .hx .status-pill{background:rgba(52,211,153,.08);color:var(--hx-accent);border-color:rgba(52,211,153,.45);}
 
@@ -450,6 +490,7 @@
   }
   .cap small a{color:var(--hx-accent);pointer-events:auto;text-decoration:none;border-bottom:1px solid rgba(52,211,153,.35);}
   .cap small a:hover{border-bottom-color:var(--hx-accent);}
+  .cap small a{white-space:nowrap;}
 
   /* the "recent projects" card between the name and the story */
   .cap.cap-intro{top:50%;}
@@ -492,6 +533,11 @@
   .nav.on-dark .nav-name{color:#e9f1f5;}
   .nav.on-dark .nav-links a{color:#8aa0ae;}
   .nav.on-dark .nav-links a:hover{color:#34d399;}
+  .nav.on-dark .nav-toggle{color:#e9f1f5;border-color:rgba(255,255,255,.22);}
+  @media (max-width:720px){
+    .nav.on-dark .nav-links{background:#060b10;border-bottom-color:rgba(255,255,255,.08);}
+    .nav.on-dark .nav-links a{border-top-color:rgba(255,255,255,.08);}
+  }
 
   /* ---------- staggered children ---------- */
   .anim .pillars .pillar,
@@ -560,7 +606,8 @@
 <nav class="nav">
   <div class="wrap nav-in">
     <a class="nav-name" href="#top">Hari Ulaganathan</a>
-    <div class="nav-links">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="nav-links" id="nav-links">
       <a href="#value">Value</a>
       <a href="#work">Case studies</a>
       <a href="#experience">Experience</a>
@@ -578,7 +625,7 @@
       <div class="hx-top">
         <img class="portrait" src="hari.jpg" alt="Hari Prasath Ulaganathan">
         <div>
-          <div class="hero-meta">Data Analyst &nbsp;·&nbsp; Silverthorne, Colorado &nbsp;·&nbsp; Open to relocation</div>
+          <div class="hero-meta"><span>Data Analyst</span><span>Silverthorne, Colorado</span><span>Open to relocation</span></div>
           <div class="status-line">
             <span class="status-pill">No visa sponsorship required</span>
             <span class="status-pill">Valid EAD, no restrictions</span>
@@ -991,6 +1038,20 @@
 <script>
 (function () {
   "use strict";
+
+  // Phone menu: the toggle opens the link panel; a link, Escape or a tap outside closes it.
+  var navEl = document.querySelector(".nav"), navBtn = document.querySelector(".nav-toggle");
+  if (navEl && navBtn) {
+    var setMenu = function (open) {
+      navEl.classList.toggle("open", open);
+      navBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      navBtn.textContent = open ? "Close" : "Menu";
+    };
+    navBtn.addEventListener("click", function () { setMenu(!navEl.classList.contains("open")); });
+    navEl.querySelectorAll(".nav-links a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+    document.addEventListener("click", function (e) { if (!navEl.contains(e.target)) setMenu(false); });
+  }
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!("IntersectionObserver" in window)) return;
@@ -1476,11 +1537,13 @@
       var nw = vertical ? Math.min(92, box.w / 4 - 6) : Math.min(176, box.w / 5 - 24);
       var nh = vertical ? 26 : 30;
       cols.forEach(function (names, ci) {
+        // stacked on phones: rows with fewer models get wider boxes so the names fit
+        var w = vertical ? Math.min(170, box.w / names.length - 8) : nw;
         names.forEach(function (name, ni) {
           var along = (ni + 0.5) / names.length, cx, cy;
           if (vertical) { cx = box.x + along * box.w; cy = box.y + (ci + 0.5) / 5 * box.h; }
           else { cx = box.x + (ci + 0.5) / 5 * box.w; cy = box.y + along * box.h; }
-          nodes[name] = { cx: cx, cy: cy, w: nw, h: nh, layer: ci };
+          nodes[name] = { cx: cx, cy: cy, w: w, h: nh, layer: ci };
         });
       });
       var edges = REFS.map(function (e) { return [nodes[e[1]], nodes[e[0]]]; });
@@ -1526,6 +1589,7 @@
       el.style.top = y.toFixed(1) + "px";
       labelLayer.appendChild(el);
       labels.push({ el: el, stages: stages });
+      return el;
     };
 
     var build = function () {
@@ -1541,12 +1605,28 @@
       var nameBox = { x: s.left - rect.left, y: s.top - rect.top + 10, w: s.width, h: s.height - 20 };
       var nameLines = nameBox.w > 720 ? ["HARI PRASATH", "ULAGANATHAN"] : ["HARI", "PRASATH", "ULAGANATHAN"];
       var side = mobile ? 16 : Math.max(24, (W - 1180) / 2);
-      var propBox = { x: side + (mobile ? 0 : 40), y: H * (mobile ? 0.44 : 0.33), w: W - side * 2 - (mobile ? 0 : 40), h: H * (mobile ? 0.34 : 0.5) };
-      var dagBox = mobile ? { x: 12, y: H * 0.38, w: W - 24, h: H * 0.56 }
-                          : { x: side, y: H * 0.34, w: W - side * 2, h: H * 0.52 };
-      var budBox = mobile ? { x: 16, y: H * 0.44, w: W - 32, h: H * 0.34 }
-                          : { x: side + 40, y: H * 0.38, w: W - side * 2 - 80, h: H * 0.44 };
-      var numBox = { x: W * 0.08, y: H * (mobile ? 0.38 : 0.3), w: W * 0.84, h: H * (mobile ? 0.48 : 0.6) };
+      var propBox, dagBox, budBox, numBox;
+      if (mobile) {
+        // On phones the captions wrap to several lines, so start each visual just
+        // below the tallest caption instead of at a fixed share of the screen.
+        // caps[0] is the intro card; caps[1..5] belong to stages 2..6 in order.
+        var capEnd = function () {
+          var b = H * 0.18;
+          Array.prototype.forEach.call(arguments, function (i) { var c = caps[i]; if (c) b = Math.max(b, c.offsetTop + c.offsetHeight); });
+          return b;
+        };
+        var room = function (top, bottomPad, cap) { return Math.max(160, Math.min(H * cap, H - top - bottomPad)); };
+        var propTop = capEnd(1, 2) + 44, budTop = capEnd(3) + 74, dagTop = capEnd(4) + 26, numTop = capEnd(5) + 18;
+        propBox = { x: 16, y: propTop, w: W - 32, h: room(propTop, 64, 0.42) };
+        budBox = { x: 16, y: budTop, w: W - 32, h: room(budTop, 54, 0.42) };
+        dagBox = { x: 12, y: dagTop, w: W - 24, h: room(dagTop, 28, 0.66) };
+        numBox = { x: W * 0.06, y: numTop, w: W * 0.88, h: room(numTop, 40, 0.5) };
+      } else {
+        propBox = { x: side + 40, y: H * 0.33, w: W - side * 2 - 40, h: H * 0.5 };
+        dagBox = { x: side, y: H * 0.34, w: W - side * 2, h: H * 0.52 };
+        budBox = { x: side + 40, y: H * 0.38, w: W - side * 2 - 80, h: H * 0.44 };
+        numBox = { x: W * 0.08, y: H * 0.3, w: W * 0.84, h: H * 0.6 };
+      }
 
       charts = packCharts();
       var prop = propertyShape(propBox, false);
@@ -1584,7 +1664,8 @@
       else label("Over budget → alert sent", bud.over.x, bud.over.y - 18, [4], "hx-label-c hx-label-hi hx-label-alert");
       Object.keys(dag.nodes).forEach(function (name) {
         var nd = dag.nodes[name];
-        label(name, nd.cx, nd.cy, [5], "hx-label-c hx-label-node" + (nd.layer === 4 ? " hx-label-hi" : ""));
+        var el = label(name, nd.cx, nd.cy, [5], "hx-label-c hx-label-node" + (nd.layer === 4 ? " hx-label-hi" : ""));
+        if (mobile) el.style.fontSize = Math.max(8, Math.min(11, (nd.w - 6) / (name.length * 0.6))).toFixed(1) + "px";
       });
       if (!mobile) ["raw", "staging", "intermediate", "marts", "report"].forEach(function (t, ci) {
         label(t.toUpperCase(), dagBox.x + (ci + 0.5) / 5 * dagBox.w, dagBox.y - 30, [5], "hx-label-c");
