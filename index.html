@@ -18,22 +18,10 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Hari Prasath Ulaganathan","jobTitle":"Data Analyst","url":"https://hari-94.github.io/","image":"https://hari-94.github.io/hari.jpg","address":{"@type":"PostalAddress","addressLocality":"Silverthorne","addressRegion":"CO","addressCountry":"US"},"sameAs":["https://github.com/hari-94","https://www.linkedin.com/in/hari-prasath-u--/"],"knowsAbout":["SQL","Python","dbt","Snowflake","Tableau","Power BI","Looker","Streamlit","Supabase","Google OR-Tools","Power Automate"]}
 </script>
-<script>
-  // Visit analytics: Google Analytics 4 (approximate location, device, browser,
-  // referrer, scroll depth). Paste the property's measurement ID ("G-...") here;
-  // left empty, nothing loads. Only counts visits on the live site.
-  window.GA_ID = "";
-  if (window.GA_ID && location.hostname === "hari-94.github.io") {
-    var ga = document.createElement("script");
-    ga.async = true;
-    ga.src = "https://www.googletagmanager.com/gtag/js?id=" + window.GA_ID;
-    document.head.appendChild(ga);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () { dataLayer.push(arguments); };
-    gtag("js", new Date());
-    gtag("config", window.GA_ID);
-  }
-</script>
+<!-- Visit stats: GoatCounter (no cookies). Records country and region, device size,
+     browser and system, and the referring site; never IP addresses or names.
+     Dashboard: https://hari-94.goatcounter.com -->
+<script data-goatcounter="https://hari-94.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -1172,7 +1160,7 @@
   <div class="foot">
     <span>Hari Prasath Ulaganathan · Silverthorne, Colorado</span>
     <span>EAD (I-485) · Open to relocation</span>
-    <span class="ga-note" hidden>Visits are counted with Google Analytics: approximate location and device, no personal details.</span>
+    <span>Visits are counted with GoatCounter: approximate location and device, no cookies or personal details.</span>
   </div>
 
 </main>
@@ -2002,8 +1990,6 @@
   })();
 
   // ---------------------------------------------------------------------
-  if (window.GA_ID) { var gn = document.querySelector(".ga-note"); if (gn) gn.hidden = false; }
-
   // Flow diagrams inside the case studies, in the same pixel style as the
   // hero's dbt lineage: boxes assemble from scattered dots when the figure
   // scrolls into view, then dots keep flowing along the edges.
