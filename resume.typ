@@ -44,7 +44,7 @@ Data Analyst with 4+ years of professional experience spanning data analytics, b
 
 *Analytics & Data Science:* Pandas, NumPy, SciPy, Scikit-Learn, Statsmodels, regression, time series, NLP, Matplotlib, Seaborn
 
-*Development & Tools:* Streamlit, Supabase, Git/GitHub, REST APIs, ReportLab, openpyxl, Google OR-Tools, Power Automate, SharePoint
+*Development & Tools:* Streamlit, Supabase, Git/GitHub, REST APIs, ReportLab, openpyxl, Google OR-Tools, Power Automate, SharePoint, LLM Agents, MCP
 
 *Professional:* Stakeholder Communication, Requirements Gathering, Documentation, Project Management, Proposal Writing
 
@@ -86,22 +86,21 @@ Replaced ad-hoc, untested SQL scripts with a layered, tested ETL pipeline feedin
 // A project line: bold name, italic stack, and the repo pushed to the right margin.
 #let project(name, stack, repo) = block(above: 0.95em, below: 0.5em)[*#name* #h(0.3em) #emph(stack) #h(1fr) #link("https://github.com/hari-94/" + repo.text)[github.com/hari-94/#repo]]
 
-#block(above: 1em, below: 0.5em)[*Self-Service Business Intelligence Enablement — CMA-CGM* #h(0.3em) _Looker · Snowflake · SQL_]
+#block(above: 1em, below: 0.5em)[*AI Job-Search Agent with WhatsApp Delivery* #h(0.3em) _LLM agent · MCP · Python · REST API · Task Scheduler_]
+- Designed an LLM agent that runs 10+ nationwide searches each morning through Indeed and ZipRecruiter MCP connectors, screens postings against written rules (experience, pay, recency, clearance), drops repeats and sends ranked matches with a fit-and-gap note: 40 vetted matches in its first six days.
+- Built the delivery layer in Python: 186 scheduled reminders sent every 5 minutes by Windows Task Scheduler after measuring GitHub Actions cron running hours late, and traced intermittent 403s to the gateway’s command-injection filter, fixing them with a workaround proven by a no-send preflight of every message.
+
+#block(above: 0.95em, below: 0.5em)[*Self-Service Business Intelligence Enablement — CMA-CGM* #h(0.3em) _Looker · Snowflake · SQL_]
 - Built LookML Explores and metric definitions over curated Snowflake tables so PMO and infrastructure teams could self-serve ticketing and resource KPIs, and profiled source data to fix upstream quality issues.
 
-#project[Stock Market ETL Pipeline][Python · Pandas · Yahoo Finance API · Snowflake][ETL]
-- Pulls daily prices from the Yahoo Finance API, adds a 7-day moving average in Pandas and loads Snowflake, resuming a suspended warehouse, creating the table on first run and keeping credentials in environment variables.
+#project[Stock Data Pipeline and Strategy Backtest][Python · Pandas · Snowflake][ETL]
+- ETL from the Yahoo Finance API into Snowflake with a 7-day moving average computed in Pandas, the table created on first run, a suspended warehouse resumed automatically and credentials kept out of code.
+- Backtested a moving-average crossover strategy against buy-and-hold on six stocks (#link("https://github.com/hari-94/Golden-Crossover-Analysis")[notebook]): buy-and-hold won on five of six, NVDA the exception at 21,349% against 18,864%.
 
-#project[Spending vs Savings Dashboard][Power BI · Snowflake · DirectQuery][PowerBI-Dashboard]
-- Star-schema mart over Snowflake’s TPC-H sample data, queried live through DirectQuery, with country-level spending-versus-savings ratios and Sankey and waterfall views of sales growth from 1992 to 1998.
+#project[BI Dashboards][Power BI · Tableau · Snowflake · DirectQuery][PowerBI-Dashboard]
+- Power BI star-schema mart over Snowflake’s TPC-H data via DirectQuery, comparing spending and savings by country with Sankey and waterfall views, plus a #link("https://public.tableau.com/views/Sales_17411241874230/Dashboard1")[Tableau Public] sales dashboard with year-over-year KPIs.
 
-#project[Sales Performance Dashboard][Tableau Public · star schema][Dashboards]
-- Interactive dashboard over a four-table star schema with year-over-year growth KPIs and trend indicators, weekly trends and sub-category comparisons, driven by a year parameter.
-
-#project[Golden Cross Strategy Backtest][Python · Pandas · Jupyter][Golden-Crossover-Analysis]
-- Backtested a moving-average crossover trading strategy against buy-and-hold for six stocks (SPY, AAPL, MSFT, NVDA, TSLA, GOOGL), finding buy-and-hold ahead for five of six, with NVDA the exception at 21,349% against 18,864%.
-
-#block(above: 1em, below: 0.5em)[*Case studies* — scheduling engine, budget tracker and dbt warehouse, with animated walkthroughs: #link("https://hari-94.github.io")[hari-94.github.io]]
+#block(above: 1em, below: 0.5em)[*Case studies* — scheduling engine used by 41 colleagues, budget tracker, dbt warehouse: #link("https://hari-94.github.io")[hari-94.github.io]]
 
 == Education
 
@@ -114,4 +113,3 @@ Replaced ad-hoc, untested SQL scripts with a layered, tested ETL pipeline feedin
 
 - Business Analyst Certification — ThoughtSpot (Mar 2025)
 - Databricks Academy Accreditation — Lakehouse Fundamentals (Dec 2024); Generative AI Fundamentals (Feb 2025)
-- Job Simulations via Forage — Data Analytics, Deloitte Australia; Digital Intelligence, PwC Switzerland (Feb 2025)
