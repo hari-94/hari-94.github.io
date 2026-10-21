@@ -4,6 +4,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Hari Prasath Ulaganathan: data analyst who builds scheduling, budgeting and analytics tools, from raw data to the decision.">
 <meta name="theme-color" content="#060b10">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hari-94.github.io/">
+<meta property="og:title" content="Hari Prasath Ulaganathan · Data Analyst">
+<meta property="og:description" content="Case study: how I automated a 245-room resort's housekeeping schedule end to end with Python, OR-Tools and Power Automate. Plus budgeting and analytics projects.">
+<meta property="og:image" content="https://hari-94.github.io/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
 <title>Hari Ulaganathan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -655,14 +663,14 @@
       <div class="cap cap-intro"><div class="cap-card">
         <b>Recent projects</b>
         <strong>A few things I've built lately.</strong>
-        <div class="pj"><i>01</i><p>Housekeeping scheduling engine</p><em>Grand Colorado on Peak 8 · Python, optimisation</em></div>
+        <div class="pj"><i>01</i><p>Housekeeping scheduling, automated</p><em>Grand Colorado on Peak 8 · Python, OR-Tools, Power Automate</em></div>
         <div class="pj"><i>02</i><p>Budget tracking system</p><em>Grand Colorado on Peak 8 · Streamlit, Supabase</em></div>
         <div class="pj"><i>03</i><p>Analytics warehouse</p><em>dbt · 15 models · 51 tests</em></div>
         <div class="pj"><i>04</i><p>What they're worth</p><em>Hours and dollars saved each year</em></div>
         <small>Keep scrolling to watch them run ↓</small>
       </div></div>
       <div class="cap"><b>01 · Scheduling engine · The problem</b><span>245 rooms across three buildings, <em>assigned by hand</em> every morning.</span><small>Real floor plans · illustrative day · <a href="#work">how it works ↓</a></small></div>
-      <div class="cap"><b>01 · Scheduling engine · The algorithm</b><span>Now an algorithm builds the charts: <em>fair workloads, less walking</em>, no rule broken.</span><small><a href="https://github.com/hari-94/BGV-Scheduling" target="_blank" rel="noopener">BGV-Scheduling</a> · <a href="#work">details ↓</a></small></div>
+      <div class="cap"><b>01 · Scheduling engine · The algorithm</b><span>Now it builds itself at 5 AM: <em>fair workloads, less walking</em>, no rule broken.</span><small><a href="https://github.com/hari-94/BGV-Scheduling" target="_blank" rel="noopener">BGV-Scheduling</a> · <a href="#scheduling">details ↓</a></small></div>
       <div class="cap"><b>02 · Budget tracking</b><span>Every expense recorded once and <em>compared with the budget as it happens</em>, with a warning before it runs over.</span><small><a href="https://github.com/hari-94/gc8-budget-tracker" target="_blank" rel="noopener">gc8-budget-tracker</a> · illustrative months · <a href="#work">details ↓</a></small></div>
       <div class="cap"><b>03 · Analytics warehouse</b><span>Raw data modelled into <em>tested layers</em>, so the dashboard number can be trusted.</span><small><a href="https://github.com/hari-94/dbt_TS" target="_blank" rel="noopener">dbt_TS</a> · <a href="#work">details ↓</a></small></div>
       <div class="cap"><b>04 · The payoff</b><span>What the tools <em>give back every year</em>.</span><small><a href="#work">See the case studies ↓</a></small></div>
@@ -709,12 +717,12 @@
 
     <dl class="figures rv">
       <div class="fig">
-        <dt data-count="598" data-suffix=" hrs">598 hrs</dt>
-        <dd>of manual work removed a year — <strong>2.3 hours every day</strong> across scheduling and budget entry</dd>
+        <dt data-count="990" data-suffix=" hrs">990 hrs</dt>
+        <dd>of manual work removed a year — <strong>about 3 hours a day</strong> across scheduling and budget entry</dd>
       </div>
       <div class="fig">
-        <dt data-count="33600" data-prefix="$">$33,600</dt>
-        <dd>cost avoided a year — <strong>$60/day</strong> in scheduling plus <strong>$1,500/month</strong> in curtailed expenses</dd>
+        <dt data-count="36250" data-prefix="$">$36,250</dt>
+        <dd>cost avoided a year — <strong>$50/day</strong> in scheduling plus <strong>$1,500/month</strong> in curtailed expenses</dd>
       </div>
       <div class="fig">
         <dt data-count="30401">30,401</dt>
@@ -725,7 +733,7 @@
         <dd>employees covered by the resulting schedule analysis</dd>
       </div>
     </dl>
-    <p class="fig-basis">Annualised on a 260-day working year. Daily and monthly figures are the measured baselines; the yearly numbers follow from them.</p>
+    <p class="fig-basis">Scheduling runs every day, so it is annualised over 365 days; budget entry over a 260-day working year. Daily and monthly figures are conservative baselines; the yearly numbers follow from them.</p>
 
     <div class="pipe">
       <span class="pipe-node">raw source</span>
@@ -748,36 +756,60 @@
 
     <div class="cases">
 
-      <article class="case rv">
+      <article class="case rv" id="scheduling">
         <div>
           <div class="case-id">Grand Colorado on Peak 8 &nbsp;·&nbsp; 2025–now</div>
-          <h3>Scheduling optimization engine</h3>
+          <h3>Housekeeping scheduling, automated end to end</h3>
           <div class="stack">
-            <span class="chip">Python</span><span class="chip">optimization</span><span class="chip">operations analytics</span>
+            <span class="chip">Python</span><span class="chip">OR-Tools</span><span class="chip">Streamlit</span><span class="chip">Supabase</span><span class="chip">Power Automate</span><span class="chip">SharePoint</span><span class="chip">Teams</span>
           </div>
           <a class="repo-link" href="https://github.com/hari-94/BGV-Scheduling" target="_blank" rel="noopener">github.com/hari-94/BGV-Scheduling &rarr;</a>
           <div class="metrics">
-            <div class="metric"><b data-count="1.3" data-dec="1" data-suffix=" hrs">1.3 hrs</b><span>saved daily</span></div>
-            <div class="metric"><b data-count="338" data-suffix=" hrs">338 hrs</b><span>a year</span></div>
-            <div class="metric"><b data-count="15600" data-prefix="$">$15,600</b><span>cost avoided / yr</span></div>
+            <div class="metric"><b data-count="2" data-suffix="+ hrs">2+ hrs</b><span>saved daily</span></div>
+            <div class="metric"><b data-count="50" data-prefix="$">$50</b><span>saved a day</span></div>
+            <div class="metric"><b data-count="18000" data-prefix="$" data-suffix="+">$18,000+</b><span>a year</span></div>
+            <div class="metric"><b data-count="0">0</b><span>manual steps</span></div>
+            <div class="metric"><b data-count="41">41</b><span>colleagues using it</span></div>
+            <div class="metric"><b data-count="0" data-prefix="$">$0</b><span>a month to run</span></div>
           </div>
         </div>
         <dl class="qa">
-          <div><dt>Problem</dt><dd>Room assignments across housekeeping staff were set by hand every morning, and quality inspectors were routed in a way that sent them back and forth between floors.</dd></div>
-          <div><dt>Built</dt><dd>A scheduling automation tool implementing custom tight-packing and greedy-packing algorithms to assign Full Clean and Daily Service rooms across staff, plus re-engineered inspector group assignment to run sequentially by floor.</dd></div>
-          <div><dt>Outcome</dt><dd class="out">Cut 1.3 hours of manual scheduling a day and about $60 a day in operating cost, and produced a composite report the department did not previously have — room assignment moved from hand-built to algorithmic.</dd></div>
+          <div><dt>Problem</dt><dd>Every morning, two people divided the day's rooms (100+ on a busy day, across three buildings that don't all connect) among 15–30 housekeepers by hand, then typed each assignment into HotSOS, the hotel's housekeeping system, one room at a time. It was slow, one wrong entry meant a missed or double-booked room, and workloads were hard to keep fair.</dd></div>
+          <div><dt>Engine</dt><dd>A Python engine packs each day's rooms into balanced workloads under the department's hard rules: a time cap per person, one apartment to one housekeeper, never two buildings that don't connect. Rooms are ordered by walking route from the real floor plans, and a Google OR-Tools (CP-SAT) solver checks each building for the fewest people and the tightest fit.</dd></div>
+          <div><dt>App</dt><dd>A Streamlit and Supabase app with roles for managers, inspectors, housekeepers and housepersons. Each person sees their own rooms on their phone, in English or Spanish, with a done-by time for each room paced to finish by 3:30 PM and early arrivals first. Managers reassign rooms by drag and drop and follow the floor live.</dd></div>
+          <div><dt>Automated</dt><dd>Power Automate saves the front desk's Arrival Report from email. At 5 AM an agent on the office PC pulls the day's room report and the staff schedule from SharePoint, builds the schedule, writes the day's sheet back to SharePoint and sends every assignment to HotSOS. At 7:30 the notes go to the team's Teams chats. A second PC takes over if the office PC is down.</dd></div>
+          <div><dt>Forecast</dt><dd>Every two hours the agent reads bookings for today and the next 21 days and turns them into how many housekeepers and inspectors each day needs, split by Full Clean and Daily Service, so a week can be staffed before it arrives.</dd></div>
+          <div><dt>Reports</dt><dd>A performance report counts rooms cleaned and inspected per person. A timing view shows when each room was started, finished and inspected, and flags late starts and rooms left open.</dd></div>
+          <div><dt>Outcome</dt><dd class="out">The schedule is ready before anyone arrives, with no manual steps from email to HotSOS. At least 2 staff hours a day come back (about $50 a day), and it runs on free tiers plus tools the department already had. In the last 30 days, 41 colleagues used it: 28 housekeepers, 10 inspectors and 3 managers.</dd></div>
         </dl>
         <div class="solved">
           <span class="solved-h">What it solved</span>
           <ul>
-            <li><strong>Schedule ready in seconds.</strong> The morning plan that took over an hour by hand is built instantly.</li>
-            <li><strong>Fair workloads.</strong> Every housekeeper gets a realistic, balanced day.</li>
-            <li><strong>Less walking.</strong> Each person's rooms are grouped close together instead of spread across the resort.</li>
-            <li><strong>Easy to use.</strong> Staff see their rooms on their phone, in English or Spanish.</li>
+            <li><strong>Ready at 5 AM.</strong> The schedule builds itself before anyone arrives, and nobody types it into HotSOS.</li>
+            <li><strong>Fair workloads.</strong> The same rules for every person, every day.</li>
+            <li><strong>Less walking.</strong> Over the stored days, Daily Service lists kept inside one building went from 112 to 153, and inspector rounds crossing buildings fell from 245 to 192.</li>
+            <li><strong>Finishes on time.</strong> 95% of room lists are paced to finish by 3:30 PM.</li>
+            <li><strong>Staffed ahead.</strong> A three-week staffing forecast from live bookings.</li>
+            <li><strong>Measured at last.</strong> Start, finish and inspection times for every room, per person.</li>
+            <li><strong>Easy to use.</strong> Rooms on each person's phone, in English or Spanish.</li>
           </ul>
         </div>
+        <div class="pipe" style="grid-column:1 / -1;margin-top:0;">
+          <span class="pipe-node">rules engine</span>
+          <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+          <span class="pipe-node">team app &amp; logins</span>
+          <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+          <span class="pipe-node">5 AM automation</span>
+          <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+          <span class="pipe-node is-end">forecast &amp; reports</span>
+          <p class="pipe-cap">How it grew, one manual task at a time: 300+ updates and about 30,000 lines of code in the current version.</p>
+        </div>
+        <figure class="flow" data-flow="auto">
+          <figcaption><b>Every morning</b> Three sources in, one 5 AM build, and the schedule lands everywhere it is needed. Nobody copies anything by hand.</figcaption>
+          <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
+        </figure>
         <figure class="flow" data-flow="sched">
-          <figcaption><b>How it works</b> The morning room list, the staff sheet and the floor plans go in. A plan in walking order comes out on every housekeeper's phone.</figcaption>
+          <figcaption><b>The engine</b> The morning room list, the staff sheet and the floor plans go in. A plan in walking order comes out on every housekeeper's phone.</figcaption>
           <div class="flow-stage"><canvas aria-hidden="true"></canvas><div class="flow-labels" aria-hidden="true"></div></div>
         </figure>
       </article>
@@ -898,6 +930,7 @@
           <div class="org">Grand Colorado on Peak 8 &nbsp;·&nbsp; Housekeeping Operations</div>
           <ul>
             <li>Built scheduling automation, a budget management application and a live KPI dashboard with month-over-month trend analysis and over-budget alerts.</li>
+            <li>Automated the daily housekeeping schedule end to end with Power Automate, a 5 AM Python build and HotSOS and Teams delivery, then added a three-week staffing forecast and per-person performance reporting; 41 colleagues use it.</li>
             <li>Built a Python ETL pipeline over an 85-sheet labor workbook and ran the quantitative analysis that followed.</li>
             <li>Own the full deployment lifecycle on GitHub and Streamlit Cloud, including validation and troubleshooting in production.</li>
           </ul>
@@ -965,7 +998,7 @@
       </div>
       <div>
         <div class="skill-h">Building &amp; shipping</div>
-        <p class="skill-l">Streamlit · Supabase · Git/GitHub · REST APIs · ReportLab · openpyxl · scheduling and resource optimization algorithms</p>
+        <p class="skill-l">Streamlit · Supabase · Git/GitHub · REST APIs · ReportLab · openpyxl · Google OR-Tools · Power Automate · SharePoint · scheduling and resource optimization algorithms</p>
       </div>
       <div>
         <div class="skill-h">Working with people</div>
@@ -1167,14 +1200,16 @@
   var root = document.documentElement;
   var hx = document.querySelector(".hx");
   var nav = document.querySelector(".nav");
-  var pipe = document.querySelector(".pipe");
-  var pipeNodes = pipe ? pipe.querySelectorAll(".pipe-node") : [];
-  var pipeArrows = pipe ? pipe.querySelectorAll(".pipe-arrow") : [];
+  var pipes = Array.prototype.map.call(document.querySelectorAll(".pipe"), function (el) {
+    return { el: el, nodes: el.querySelectorAll(".pipe-node"), arrows: el.querySelectorAll(".pipe-arrow") };
+  });
   var roles = document.querySelector(".roles");
   var roleItems = roles ? roles.querySelectorAll(".role") : [];
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
 
-  Array.prototype.forEach.call(pipeArrows, function (a, i) { a.style.setProperty("--i", i); });
+  pipes.forEach(function (pp) {
+    Array.prototype.forEach.call(pp.arrows, function (a, i) { a.style.setProperty("--i", i); });
+  });
 
   var update = function () {
     ticking = false;
@@ -1185,18 +1220,18 @@
     if (hx && nav) nav.classList.toggle("on-dark", hx.getBoundingClientRect().bottom > 56);
     if (reduce) return;
 
-    if (pipe) {
+    pipes.forEach(function (pp) {
       var start = vh * 0.92, end = vh * 0.45;
-      var p = clamp((start - pipe.getBoundingClientRect().top) / (start - end));
-      var seg = p * pipeArrows.length;
-      Array.prototype.forEach.call(pipeArrows, function (a, i) {
+      var p = clamp((start - pp.el.getBoundingClientRect().top) / (start - end));
+      var seg = p * pp.arrows.length;
+      Array.prototype.forEach.call(pp.arrows, function (a, i) {
         a.style.setProperty("--f", clamp(seg - i).toFixed(3));
       });
-      Array.prototype.forEach.call(pipeNodes, function (n, i) {
+      Array.prototype.forEach.call(pp.nodes, function (n, i) {
         n.classList.toggle("lit", i === 0 ? p > 0 : seg - (i - 1) >= 1);
       });
-      pipe.classList.toggle("flowing", p >= 1);
-    }
+      pp.el.classList.toggle("flowing", p >= 1);
+    });
 
     if (roles) {
       var line = vh * 0.62;
@@ -1819,6 +1854,18 @@
   // Each box is a real part of the app; labels are kept plain on purpose.
   // ---------------------------------------------------------------------
   var FLOWS = {
+    auto: {
+      heads: ["Sources", "Collected", "5 AM build", "Stored", "Delivered"],
+      cols: [
+        [["mail", "Arrival Report email"], ["rpt", "Room list report"], ["staff", "Staff schedule"]],
+        [["pa", "Power Automate"], ["agent", "Office PC agent"]],
+        [["eng", "Rules engine + OR-Tools"]],
+        [["db", "Supabase"]],
+        [["hot", "HotSOS assignments", 1], ["sp", "SharePoint & Teams", 1], ["app", "Phone app", 1], ["fc", "Forecast & reports", 1]]
+      ],
+      edges: [["mail", "pa"], ["pa", "agent"], ["rpt", "agent"], ["staff", "agent"], ["agent", "eng"], ["eng", "db"],
+        ["db", "hot"], ["db", "sp"], ["db", "app"], ["db", "fc"]]
+    },
     sched: {
       heads: ["In", "Algorithms", "Routing", "Assignment", "Out to the floor"],
       cols: [
