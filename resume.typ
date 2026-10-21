@@ -22,7 +22,7 @@
 #align(center)[
   #text(size: 22pt)[Hari Prasath Ulaganathan]
   #v(0.2em)
-  Data Analyst | Business Intelligence, Reporting & SQL Analytics
+  Data Analyst | Analytics Engineering, BI & Operations Analytics
   #v(0.25em)
   Silverthorne, CO #h(0.5em)|#h(0.5em)
   #link("mailto:hari8059@gmail.com")[hari8059\@gmail.com] #h(0.5em)|#h(0.5em)
@@ -32,75 +32,72 @@
 
 == Summary
 
-Data Analyst with 4+ years of professional experience spanning data analytics, business intelligence, and reporting, including SQL-based data analysis, dashboard development (Tableau, Power BI), and data quality validation across relational databases and cloud data platforms (Snowflake, Databricks, Azure). Skilled in ETL and data warehousing workflows, transforming raw source data into layered dbt models, building KPI and trend-analysis dashboards, and partnering with cross-functional stakeholders on requirements gathering, ad-hoc analysis, and documentation. Most recently built internal tools that remove about 990 hours of manual work and \$36,250 in cost a year. Open to relocation; portfolio and case studies at #link("https://hari-94.github.io")[hari-94.github.io].
+Data analyst with 4+ years in BI, reporting and analytics engineering, building the tools behind the numbers: a scheduling engine used by 41 colleagues, a budget tracker, and layered dbt models on Snowflake guarded by 51 data tests. The scheduling and budget tools alone save about 990 hours and \$36,250 a year. Fluent in SQL, Python, dbt, Snowflake, Databricks, Power BI and Tableau. Open to relocation; case studies at #link("https://hari-94.github.io")[hari-94.github.io].
 
 == Skills
 
-*Data Analysis & SQL:* SQL, PL/SQL, Python, R, MySQL, PostgreSQL, Microsoft SQL Server, Data Analysis, Data Validation, Data Profiling, Ad-hoc Analysis, Trend Analysis
+*Languages & Databases:* SQL, Python, R, PL/SQL, PostgreSQL, MySQL, Microsoft SQL Server
 
-*BI & Reporting:* Tableau, Tableau Online, Power BI, Qlik (QlikView, Qlik Sense), Excel (Advanced Functions, Pivot Tables, Power Query, Reporting), Dashboard Development, KPI Reporting, Metric Definitions, Business Intelligence, PowerPoint
+*Analytics Engineering:* dbt, Snowflake, Databricks, Airflow, Azure Data Factory, Azure Data Lake, AWS, ETL, dimensional modelling, data quality testing
 
-*Data Engineering & Cloud:* dbt, Snowflake, Airflow, Looker, Azure Data Factory, Azure Databricks, Azure Data Lake, AWS, ETL, Data Warehousing, Relational Databases, Cloud Data Platforms
+*BI & Reporting:* Power BI, Tableau, Looker (LookML), ThoughtSpot, Qlik Sense, QlikView, Excel (Power Query, pivot tables), KPI design
 
-*Analytics & Data Science:* Pandas, NumPy, SciPy, Scikit-Learn, Statsmodels, regression, time series, NLP, Matplotlib, Seaborn
+*Python & Statistics:* Pandas, NumPy, SciPy, scikit-learn, Statsmodels, Matplotlib, Seaborn, regression, time series, clustering, NLP
 
-*Development & Tools:* Streamlit, Supabase, Git/GitHub, REST APIs, ReportLab, openpyxl, Google OR-Tools, Power Automate, SharePoint, LLM Agents, MCP
-
-*Professional:* Stakeholder Communication, Requirements Gathering, Documentation, Project Management, Proposal Writing
+*Automation & AI:* Google OR-Tools, Streamlit, Supabase, Power Automate, REST APIs, LLM agents, MCP, Git/GitHub, ReportLab, openpyxl, SharePoint
 
 == Experience
 
 #entry[Internal Tools Developer (Housekeeping Operations)][, Grand Colorado on Peak 8][Nov 2025 – present]
-- Designed and built a housekeeping scheduling engine in Python (custom bin-packing with a Google OR-Tools solver) and automated it end to end with Power Automate, a 5 AM build and HotSOS and Teams delivery: no manual steps, at least 2 hours and about \$50 saved a day (\~\$18,000 a year), used by 41 colleagues.
-- Added a three-week staffing forecast built from live bookings, plus per-person performance and room-timing reports, giving managers headcount and productivity data they did not have before.
-- Re-engineered inspector group assignment logic to be sequential by floor through data analysis of travel patterns, reducing unnecessary floor-to-floor movement during quality inspections.
-- Built a full-stack budget management application (Python, Streamlit, Supabase/PostgreSQL) on a relational database, replacing an hour a day of manual spreadsheet entry and enforcing data quality through database-level duplicate-expense validation.
-- Developed a live KPI and budgeting dashboard with month-over-month trend analysis, variance tracking, and automated over-budget alerts that helped curtail expenses by at least \$1,500 a month (\~\$18,000 a year), plus automated PDF reporting (ReportLab) for stakeholders.
-- Built a Python/openpyxl ETL pipeline that cleaned and transformed an 85-sheet, multi-year Excel labor-scheduling workbook into 30,401 structured shift records across 181 employees, then performed quantitative trend, clustering, and workload-balance analysis to inform scheduling policy.
-- Owned the full deployment lifecycle (GitHub, Streamlit Cloud), performing data validation and troubleshooting to keep analytics and reporting tools reliably in production.
+- Built a Python scheduling engine (custom bin-packing plus a Google OR-Tools solver) that assigns every Full Clean and Daily Service room, then automated it with Power Automate: it builds at 5 AM and lands in HotSOS and Teams with no manual steps. Used by 41 colleagues; saves 2+ hours and about \$50 a day (\~\$18,000 a year).
+- Added a three-week staffing forecast built from live bookings, plus per-person performance and room-timing reports, giving managers headcount and productivity figures they never had.
+- Re-sequenced inspector assignments floor by floor after analysing travel patterns, cutting unnecessary walking between floors during quality inspections.
+- Built a budget application (Python, Streamlit, Supabase/PostgreSQL) that replaced an hour a day of spreadsheet entry and blocks duplicate expenses at the database level.
+- Added a live budget dashboard with month-over-month trends, variance tracking, over-budget alerts and automated PDF reports (ReportLab), which helped cut spending by at least \$1,500 a month (\~\$18,000 a year).
+- Turned an 85-sheet, multi-year Excel scheduling workbook into 30,401 clean shift records for 181 employees with a Python ETL (openpyxl), then used trend, clustering and workload-balance analysis to inform scheduling policy.
+- Own deployment and production support for all three tools (GitHub, Streamlit Cloud).
 
 #entry[Solutions Analyst][, ThoughtSpot][Aug 2022 – June 2023]
-- Collaborated with cross-functional stakeholders to gather business requirements and translate them into KPI and metric definitions and report specifications driving dashboard development.
-- Delivered business intelligence dashboards on schedule, enabling data-driven decision-making and self-service analytics for client teams.
-- Wrote SQL queries against Snowflake data warehouse tables to support data analysis, ad-hoc reporting requests, and dashboard metric development.
-- Authored data-informed business proposals that secured new client engagements, and mentored team members on SQL-based data handling, data quality investigation, and dashboard development best practices.
+- Turned client requirements into KPI definitions, report specs and on-schedule dashboards that client teams used for self-service analysis.
+- Wrote SQL against Snowflake for ad-hoc analysis and dashboard metrics.
+- Wrote the data analysis behind proposals that won new client engagements, and coached teammates on SQL and data-quality investigation.
 
-#block(above: 0.9em, below: 0.55em)[*ThoughtSpot ETL project — delivery analytics pipeline* #h(0.3em) _Databricks · Snowflake · dbt · Python · SQL_]
-Replaced ad-hoc, untested SQL scripts with a layered, tested ETL pipeline feeding the delivery dashboard.
-- *Raw (ingestion):* wrote Python scripts on Databricks to extract four operational sources (projects, resources, resource allocations and support tickets), cleanse them and load them into raw tables in Snowflake.
-- *Staging (dbt views):* one model per source that only cleans, casting types, normalising free-typed status values to a controlled vocabulary and converting Y/N flags to booleans, with no business logic.
-- *Intermediate (ephemeral dbt models):* shared business rules defined once, pricing each allocation at the resource’s rate and measuring ticket resolution hours against P1/P2/P3 SLA targets kept in a macro and project variables.
-- *Marts (dbt tables):* conformed project and resource dimensions, allocation and ticket fact tables at a declared grain, and a pre-aggregated project-health table the dashboard reads directly, so the BI layer does no arithmetic of its own.
-- *Quality and automation:* 51 data tests (uniqueness, referential integrity, accepted values, ranges) and two singular tests fail the build before bad data reaches a dashboard; Python scripts on the marts automate recurring KPI reports.
+#block(above: 0.9em, below: 0.55em)[*ThoughtSpot ETL project: delivery analytics pipeline* #h(0.3em) _Databricks · Snowflake · dbt · Python · SQL_]
+Replaced untested ad-hoc SQL with a layered, tested pipeline feeding the project-delivery dashboard.
+- *Raw:* Python ingestion on Databricks pulling four operational sources (projects, resources, resource allocations, support tickets) into raw tables in Snowflake.
+- *Staging (dbt views):* cleaning only. Types cast, free-typed status values mapped to a controlled vocabulary, Y/N flags turned into booleans.
+- *Intermediate (ephemeral dbt models):* business rules defined once, pricing each allocation at the resource’s rate and measuring ticket resolution hours against P1/P2/P3 SLA targets held in a macro.
+- *Marts (dbt tables):* project and resource dimensions, allocation and ticket facts at a declared grain, and a pre-aggregated project-health table the dashboard reads as is, so every report shows the same number.
+- *Tests and reports:* 51 data tests (uniqueness, referential integrity, accepted values, ranges) and two singular tests stop bad data at build time; Python scripts on the marts generate the recurring KPI reports.
 
 #entry[PMO Senior Executive][, CMA-CGM][June 2020 – Nov 2021]
-- Published weekly and monthly KPI and project status reports, and built business intelligence dashboards tracking resource-allocation and delivery performance metrics for the IT infrastructure team.
-- Performed trend analysis on project and resource reporting data to proactively flag risks and showstoppers, supporting faster stakeholder-driven issue resolution.
-- Managed contractor invoicing, SharePoint-based reporting and documentation administration, and preliminary hiring interviews for team vacancies.
+- Built the IT infrastructure team’s KPI dashboards and published weekly and monthly status reports on resource allocation and delivery.
+- Spotted delivery risks in project and resource trends and escalated them early, so blockers were resolved faster.
+- Ran contractor invoicing, SharePoint reporting and documentation, and first-round hiring interviews.
 
 #entry[Management Trainee, Risk Management][, CMA-CGM][July 2019 – June 2020]
-- Supported ad-hoc analysis, project reporting, and resource/asset tracking for leadership requests, contributing to risk administration and business reporting.
+- Handled ad-hoc analysis, project reporting and asset tracking for leadership in the risk management team.
 
 == Projects
 
 // A project line: bold name, italic stack, and the repo pushed to the right margin.
 #let project(name, stack, repo) = block(above: 0.95em, below: 0.5em)[*#name* #h(0.3em) #emph(stack) #h(1fr) #link("https://github.com/hari-94/" + repo.text)[github.com/hari-94/#repo]]
 
-#block(above: 1em, below: 0.5em)[*AI Job-Search Agent with WhatsApp Delivery* #h(0.3em) _LLM agent · MCP · Python · REST API · Task Scheduler_]
-- Designed an LLM agent that runs 10+ nationwide searches each morning through Indeed and ZipRecruiter MCP connectors, screens postings against written rules (experience, pay, recency, clearance), drops repeats and sends ranked matches with a fit-and-gap note: 40 vetted matches in its first six days.
-- Built the delivery layer in Python: 186 scheduled reminders sent every 5 minutes by Windows Task Scheduler after measuring GitHub Actions cron running hours late, and traced intermittent 403s to the gateway’s command-injection filter, fixing them with a workaround proven by a no-send preflight of every message.
+#block(above: 1em, below: 0.5em)[*AI Job-Search Agent* #h(0.3em) _LLM agent · MCP · Python · REST API · Task Scheduler_]
+- Designed an LLM agent that runs 10+ nationwide searches each morning through Indeed and ZipRecruiter MCP connectors, screens each posting against written rules (experience, pay, recency, clearance), skips repeats and sends ranked matches with a fit-and-gap note to WhatsApp: 40 vetted matches in its first six days.
+- Moved 186 scheduled reminders from GitHub Actions, whose cron ran hours late, to Windows Task Scheduler, and traced intermittent 403 errors to the message gateway’s command-injection filter, fixing them and verifying the fix with a dry run over every message.
 
-#block(above: 0.95em, below: 0.5em)[*Self-Service Business Intelligence Enablement — CMA-CGM* #h(0.3em) _Looker · Snowflake · SQL_]
-- Built LookML Explores and metric definitions over curated Snowflake tables so PMO and infrastructure teams could self-serve ticketing and resource KPIs, and profiled source data to fix upstream quality issues.
+#block(above: 0.95em, below: 0.5em)[*Self-Service BI, CMA-CGM* #h(0.3em) _Looker · Snowflake · SQL_]
+- Built LookML Explores and metric definitions on curated Snowflake tables so PMO and infrastructure teams could pull ticketing and resource KPIs themselves, and profiled source data to fix upstream quality issues.
 
 #project[Stock Data Pipeline and Strategy Backtest][Python · Pandas · Snowflake][ETL]
-- ETL from the Yahoo Finance API into Snowflake with a 7-day moving average computed in Pandas, the table created on first run, a suspended warehouse resumed automatically and credentials kept out of code.
+- Python ETL from the Yahoo Finance API into Snowflake: 7-day moving average in Pandas, table created on first run, a suspended warehouse resumed automatically, credentials kept in environment variables.
 - Backtested a moving-average crossover strategy against buy-and-hold on six stocks (#link("https://github.com/hari-94/Golden-Crossover-Analysis")[notebook]): buy-and-hold won on five of six, NVDA the exception at 21,349% against 18,864%.
 
 #project[BI Dashboards][Power BI · Tableau · Snowflake · DirectQuery][PowerBI-Dashboard]
-- Power BI star-schema mart over Snowflake’s TPC-H data via DirectQuery, comparing spending and savings by country with Sankey and waterfall views, plus a #link("https://public.tableau.com/views/Sales_17411241874230/Dashboard1")[Tableau Public] sales dashboard with year-over-year KPIs.
+- Power BI star-schema mart on Snowflake’s TPC-H data over DirectQuery, comparing spending and savings by country with Sankey and waterfall views, and a #link("https://public.tableau.com/views/Sales_17411241874230/Dashboard1")[Tableau Public] sales dashboard with year-over-year KPIs.
 
-#block(above: 1em, below: 0.5em)[*Case studies* — scheduling engine used by 41 colleagues, budget tracker, dbt warehouse: #link("https://hari-94.github.io")[hari-94.github.io]]
+#block(above: 1em, below: 0.5em)[*Case studies:* scheduling engine, budget tracker and dbt warehouse, with animated walkthroughs, at #link("https://hari-94.github.io")[hari-94.github.io]]
 
 == Education
 
@@ -111,5 +108,5 @@ Replaced ad-hoc, untested SQL scripts with a layered, tested ETL pipeline feedin
 
 == Certifications
 
-- Business Analyst Certification — ThoughtSpot (Mar 2025)
-- Databricks Academy Accreditation — Lakehouse Fundamentals (Dec 2024); Generative AI Fundamentals (Feb 2025)
+- ThoughtSpot Business Analyst Certification (Mar 2025)
+- Databricks Academy: Lakehouse Fundamentals (Dec 2024), Generative AI Fundamentals (Feb 2025)
