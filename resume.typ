@@ -1,7 +1,7 @@
 // Résumé source. Build with Typst and the XCharter font (CTAN: fonts/xcharter):
 //   typst compile --font-path <dir with XCharter-*.otf> resume.typ resume.pdf
-// Figures match the portfolio: 1.3 hrs + $60/day (scheduling), 1 hr/day +
-// $1,500/month (budget), annualised on a 260-day working year.
+// Figures match the portfolio: 2+ hrs + $50/day (scheduling, which runs every
+// day, so 365 days), 1 hr/day + $1,500/month (budget, a 260-day working year).
 
 #set document(title: "Hari Prasath Ulaganathan - CV", author: "Hari Prasath Ulaganathan")
 #set page(paper: "us-letter", margin: (x: 0.6in, y: 0.5in))
@@ -32,7 +32,7 @@
 
 == Summary
 
-Data Analyst with 4+ years of professional experience spanning data analytics, business intelligence, and reporting, including SQL-based data analysis, dashboard development (Tableau, Power BI), and data quality validation across relational databases and cloud data platforms (Snowflake, Azure). Skilled in ETL and data warehousing workflows, transforming raw source data into layered dbt models, building KPI and trend-analysis dashboards, and partnering with cross-functional stakeholders on requirements gathering, ad-hoc analysis, and documentation. Most recently built internal tools that remove about 598 hours of manual work and \$33,600 in cost a year. Open to relocation; portfolio and case studies at #link("https://hari-94.github.io")[hari-94.github.io].
+Data Analyst with 4+ years of professional experience spanning data analytics, business intelligence, and reporting, including SQL-based data analysis, dashboard development (Tableau, Power BI), and data quality validation across relational databases and cloud data platforms (Snowflake, Azure). Skilled in ETL and data warehousing workflows, transforming raw source data into layered dbt models, building KPI and trend-analysis dashboards, and partnering with cross-functional stakeholders on requirements gathering, ad-hoc analysis, and documentation. Most recently built internal tools that remove about 990 hours of manual work and \$36,250 in cost a year. Open to relocation; portfolio and case studies at #link("https://hari-94.github.io")[hari-94.github.io].
 
 == Skills
 
@@ -44,14 +44,15 @@ Data Analyst with 4+ years of professional experience spanning data analytics, b
 
 *Analytics & Data Science:* Pandas, NumPy, SciPy, Scikit-Learn, Statsmodels, regression modeling, time series, NLP, Matplotlib, Seaborn
 
-*Development & Tools:* Streamlit, Supabase, Git/GitHub, REST APIs, ReportLab, openpyxl
+*Development & Tools:* Streamlit, Supabase, Git/GitHub, REST APIs, ReportLab, openpyxl, Google OR-Tools, Power Automate, SharePoint
 
 *Professional:* Stakeholder Communication, Requirements Gathering, Documentation, Project Management, Proposal Writing
 
 == Experience
 
 #entry[Internal Tools Developer (Housekeeping Operations)][, Grand Colorado on Peak 8][Nov 2025 – present]
-- Designed and built a scheduling automation tool for housekeeping operations, implementing custom tight-packing and greedy-packing algorithms to assign Full Clean and Daily Service rooms across staff, cutting 1.3 hours of manual scheduling and about \$60 in operating cost a day (\~\$15,600 a year).
+- Designed and built a housekeeping scheduling engine in Python (custom bin-packing with a Google OR-Tools solver) and automated it end to end with Power Automate, a 5 AM build and HotSOS and Teams delivery: no manual steps, at least 2 hours and about \$50 saved a day (\~\$18,000 a year), used by 41 colleagues.
+- Added a three-week staffing forecast built from live bookings, plus per-person performance and room-timing reports, giving managers headcount and productivity data they did not have before.
 - Re-engineered inspector group assignment logic to be sequential by floor through data analysis of travel patterns, reducing unnecessary floor-to-floor movement during quality inspections.
 - Built a full-stack budget management application (Python, Streamlit, Supabase/PostgreSQL) on a relational database, replacing an hour a day of manual spreadsheet entry and enforcing data quality through database-level duplicate-expense validation.
 - Developed a live KPI and budgeting dashboard with month-over-month trend analysis, variance tracking, and automated over-budget alerts that helped curtail expenses by at least \$1,500 a month (\~\$18,000 a year), plus automated PDF reporting (ReportLab) for stakeholders.
